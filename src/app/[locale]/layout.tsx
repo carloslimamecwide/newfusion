@@ -6,7 +6,6 @@ import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
 import { routing, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { WhatsAppSticky } from "@/components/WhatsAppSticky";
 import { getSiteUrl } from "@/lib/site";
 
 const bricolage = Bricolage_Grotesque({
@@ -64,7 +63,6 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
   const messages = await getMessages();
-  const tContact = await getTranslations({ locale, namespace: "contact" });
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -92,7 +90,6 @@ export default async function LocaleLayout({ children, params }: Props) {
           <Header />
           <main className="flex-1">{children}</main>
           <Footer locale={locale as Locale} />
-          <WhatsAppSticky label={tContact("whatsapp")} />
         </NextIntlClientProvider>
       </body>
     </html>
