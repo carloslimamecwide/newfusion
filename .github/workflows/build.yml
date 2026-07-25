@@ -32,6 +32,10 @@ jobs:
         with:
           context: .
           push: true
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}
+            NEXT_PUBLIC_WHATSAPP_NUMBER=${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}
+            NEXT_PUBLIC_CALENDLY_URL=${{ secrets.NEXT_PUBLIC_CALENDLY_URL }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.sha }}
@@ -48,9 +52,9 @@ jobs:
           echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
           echo "CONTACT_FROM=${{ secrets.CONTACT_FROM }}" >> .env
           echo "CONTACT_TO=${{ secrets.CONTACT_TO }}" >> .env
-          echo "NEXT_PUBLIC_SITE_URL=https://webfusionlab.pt" >> .env
-          echo "NEXT_PUBLIC_WHATSAPP_NUMBER=351912345678" >> .env
-          echo "NEXT_PUBLIC_CALENDLY_URL=" >> .env
+          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}" >> .env
+          echo "NEXT_PUBLIC_WHATSAPP_NUMBER=${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}" >> .env
+          echo "NEXT_PUBLIC_CALENDLY_URL=${{ secrets.NEXT_PUBLIC_CALENDLY_URL }}" >> .env
           chmod 660 .env
           docker compose -f docker-compose.production.yml pull
           docker compose -f docker-compose.production.yml up -d --remove-orphans
