@@ -31,8 +31,5 @@ Push to `main` → GitHub Actions builds Docker image → pushes to GHCR → sel
 ## Tech Stack
 
 - **Framework:** Next.js 16
-- **Styling:** Tailwind CSS 4
-- **i18n:** next-intl (PT/EN)
-- **Email:** Resend
 - **Container:** Docker
 - **Deploy:** GitHub Actions + self-hosted runner
