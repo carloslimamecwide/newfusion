@@ -1,0 +1,17 @@
+services:
+  web:
+    image: ghcr.io/carloslimamecwide/webfusionlab:latest
+    container_name: webfusionlab-web
+    restart: unless-stopped
+    env_file: .env
+    networks:
+      - apps
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  apps:
+    external: true

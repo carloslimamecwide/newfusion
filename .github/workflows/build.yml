@@ -1,0 +1,57 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      sha: ${{ steps.meta.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        run: echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.sha }}
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Deploy to VPS
+        run: |
+          echo "Deploying image with sha ${{ needs.build.outputs.sha }}..."
+          cd /srv/apps/webfusionlab
+          echo "GHCR_PAT=${{ secrets.GHCR_PAT }}" > .env
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
+          echo "CONTACT_FROM=${{ secrets.CONTACT_FROM }}" >> .env
+          echo "CONTACT_TO=${{ secrets.CONTACT_TO }}" >> .env
+          echo "NEXT_PUBLIC_SITE_URL=https://webfusionlab.pt" >> .env
+          echo "NEXT_PUBLIC_WHATSAPP_NUMBER=351912345678" >> .env
+          echo "NEXT_PUBLIC_CALENDLY_URL=" >> .env
+          chmod 660 .env
+          docker compose -f docker-compose.production.yml pull
+          docker compose -f docker-compose.production.yml up -d --remove-orphans
+          docker image prune -f
