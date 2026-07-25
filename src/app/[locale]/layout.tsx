@@ -2,16 +2,22 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { DM_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
 import { routing, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppSticky } from "@/components/WhatsAppSticky";
 import { getSiteUrl } from "@/lib/site";
 
-const dmSans = DM_Sans({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ["latin"],
+  variable: "--font-source-sans",
   display: "swap",
 });
 
@@ -73,8 +79,11 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
 
   return (
-    <html lang={locale} className={`${dmSans.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-slate-50 font-sans text-slate-900 antialiased">
+    <html
+      lang={locale}
+      className={`${bricolage.variable} ${sourceSans.variable} h-full`}
+    >
+      <body className="flex min-h-full flex-col bg-paper font-body text-ink antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

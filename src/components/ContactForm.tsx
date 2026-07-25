@@ -5,6 +5,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { services } from "@/content/services";
 import type { Locale } from "@/i18n/routing";
 
+const inputClass =
+  "w-full rounded-lg border border-line-strong bg-surface px-3.5 py-2.5 text-ink placeholder:text-faint outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20";
+
 export function ContactForm() {
   const t = useTranslations("contact");
   const locale = useLocale() as Locale;
@@ -39,40 +42,24 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div className="grid gap-4 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="space-y-5">
+      <div className="grid gap-5 sm:grid-cols-2">
         <label className="block text-sm">
-          <span className="mb-1.5 block font-medium text-slate-700">{t("name")}</span>
-          <input
-            name="name"
-            required
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-blue-600/30 focus:ring-2"
-          />
+          <span className="mb-1.5 block font-medium text-ink">{t("name")}</span>
+          <input name="name" required className={inputClass} />
         </label>
         <label className="block text-sm">
-          <span className="mb-1.5 block font-medium text-slate-700">{t("email")}</span>
-          <input
-            name="email"
-            type="email"
-            required
-            className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-blue-600/30 focus:ring-2"
-          />
+          <span className="mb-1.5 block font-medium text-ink">{t("email")}</span>
+          <input name="email" type="email" required className={inputClass} />
         </label>
       </div>
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-slate-700">{t("company")}</span>
-        <input
-          name="company"
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-blue-600/30 focus:ring-2"
-        />
+        <span className="mb-1.5 block font-medium text-ink">{t("company")}</span>
+        <input name="company" className={inputClass} />
       </label>
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-slate-700">{t("service")}</span>
-        <select
-          name="service"
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-blue-600/30 focus:ring-2"
-          defaultValue=""
-        >
+        <span className="mb-1.5 block font-medium text-ink">{t("service")}</span>
+        <select name="service" className={inputClass} defaultValue="">
           <option value="">{t("servicePlaceholder")}</option>
           {services.map((s) => (
             <option key={s.slug} value={s.slug}>
@@ -82,13 +69,8 @@ export function ContactForm() {
         </select>
       </label>
       <label className="block text-sm">
-        <span className="mb-1.5 block font-medium text-slate-700">{t("message")}</span>
-        <textarea
-          name="message"
-          required
-          rows={5}
-          className="w-full resize-y rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-blue-600/30 focus:ring-2"
-        />
+        <span className="mb-1.5 block font-medium text-ink">{t("message")}</span>
+        <textarea name="message" required rows={5} className={`${inputClass} resize-y`} />
       </label>
       <input
         type="text"
@@ -98,18 +80,20 @@ export function ContactForm() {
         className="hidden"
         aria-hidden
       />
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="w-full rounded-lg bg-blue-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 disabled:opacity-60 sm:w-auto"
-      >
-        {status === "loading" ? t("sending") : t("submit")}
-      </button>
+      <div className="pt-1">
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="w-full rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-strong disabled:opacity-60 sm:w-auto"
+        >
+          {status === "loading" ? t("sending") : t("submit")}
+        </button>
+      </div>
       {status === "ok" && (
-        <p className="text-sm font-medium text-emerald-700">{t("success")}</p>
+        <p className="text-sm font-medium text-success">{t("success")}</p>
       )}
       {status === "error" && (
-        <p className="text-sm font-medium text-red-600">{t("error")}</p>
+        <p className="text-sm font-medium text-danger">{t("error")}</p>
       )}
     </form>
   );

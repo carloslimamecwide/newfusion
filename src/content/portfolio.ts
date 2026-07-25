@@ -24,7 +24,7 @@ export const cases: CaseStudy[] = [
   {
     slug: "mariscos-da-anita",
     image:
-      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80",
+      "/images/work/mariscos.jpg",
     tags: ["website", "seo", "devops"],
     pt: {
       title: "Landing B2B para marisco HORECA",
@@ -52,7 +52,7 @@ export const cases: CaseStudy[] = [
   {
     slug: "internal-ops-portal",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+      "/images/work/portal.jpg",
     tags: ["web-app", "b2b"],
     pt: {
       title: "Portal interno de operações",
@@ -80,7 +80,7 @@ export const cases: CaseStudy[] = [
   {
     slug: "sme-digital-presence",
     image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80",
+      "/images/work/sme.jpg",
     tags: ["website", "branding"],
     pt: {
       title: "Presença digital para PME de serviços",

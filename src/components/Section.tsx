@@ -10,7 +10,10 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`px-4 py-16 sm:px-6 sm:py-20 ${className}`}>
+    <section
+      id={id}
+      className={`px-4 py-[var(--section-y)] sm:px-6 ${className}`}
+    >
       <div className="mx-auto max-w-6xl">{children}</div>
     </section>
   );
@@ -19,17 +22,23 @@ export function Section({
 export function SectionHeading({
   title,
   subtitle,
+  align = "left",
 }: {
   title: string;
   subtitle?: string;
+  align?: "left" | "center";
 }) {
   return (
-    <div className="mx-auto mb-12 max-w-2xl text-center">
-      <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+    <div
+      className={`mb-12 max-w-2xl sm:mb-16 ${
+        align === "center" ? "mx-auto text-center" : ""
+      }`}
+    >
+      <h2 className="text-3xl font-bold leading-[1.05] tracking-tight sm:text-4xl lg:text-[2.6rem]">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-base leading-relaxed text-slate-600 sm:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
           {subtitle}
         </p>
       )}

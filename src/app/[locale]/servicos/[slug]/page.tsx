@@ -1,13 +1,25 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { services, getServiceLocal } from "@/content/services";
 import { Section } from "@/components/Section";
+import { Icon } from "@/components/Icon";
 import type { Locale } from "@/i18n/routing";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
+};
+
+const serviceIcon: Record<string, Parameters<typeof Icon>[0]["name"]> = {
+  "sites-landing-pages": "globe",
+  "web-applications": "app",
+  ecommerce: "cart",
+  "mobile-apps": "mobile",
+  "integrations-apis": "link",
+  "maintenance-support": "shield",
+  "consulting-ux": "bulb",
 };
 
 export async function generateStaticParams() {
@@ -34,37 +46,54 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <>
-      <Section className="bg-gradient-to-br from-white to-blue-50/40 pt-20 pb-16 sm:pt-28 sm:pb-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 text-4xl">{svc.icon}</p>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+      {/* header band */}
+      <Section className="border-b border-line bg-surface pb-0">
+        <div className="max-w-3xl pb-10">
+          <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">
+            <Icon name={serviceIcon[svc.slug]} size={24} />
+          </span>
+          <h1 className="mt-5 font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-5xl">
             {svc.title}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
             {svc.short}
           </p>
         </div>
+        <div className="relative aspect-[21/9] overflow-hidden rounded-t-2xl bg-surface-2">
+          <Image
+            src={svc.image}
+            alt={svc.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
       </Section>
 
-      <Section className="bg-white">
-        <div className="mx-auto grid max-w-4xl gap-12 lg:grid-cols-5">
-          {/* MAIN CONTENT */}
-          <div className="space-y-10 lg:col-span-3">
+      <Section>
+        <div className="mx-auto grid max-w-5xl gap-14 lg:grid-cols-5">
+          {/* main */}
+          <div className="space-y-12 lg:col-span-3">
             <div>
-              <h2 className="text-xl font-semibold text-slate-900">
+              <h2 className="font-display text-xl font-semibold text-ink">
                 {locale === "pt" ? "Sobre este serviço" : "About this service"}
               </h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-600">
+              <p className="mt-3 text-base leading-relaxed text-muted">
                 {svc.description}
               </p>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-slate-900">{t("includes")}</h2>
-              <ul className="mt-3 space-y-2">
+              <h2 className="font-display text-xl font-semibold text-ink">
+                {t("includes")}
+              </h2>
+              <ul className="mt-4 space-y-2.5">
                 {svc.includes.map((item) => (
-                  <li key={item} className="flex items-start gap-2 text-sm text-slate-600">
-                    <span className="mt-0.5 text-blue-600">✓</span>
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-brand-soft text-brand">
+                      <Icon name="check" size={13} />
+                    </span>
                     {item}
                   </li>
                 ))}
@@ -72,12 +101,14 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-slate-900">{t("process")}</h2>
-              <ol className="mt-3 space-y-3">
+              <h2 className="font-display text-xl font-semibold text-ink">
+                {t("process")}
+              </h2>
+              <ol className="mt-4 space-y-4">
                 {svc.process.map((step, i) => (
-                  <li key={step} className="flex items-start gap-3 text-sm text-slate-600">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-700">
-                      {i + 1}
+                  <li key={step} className="flex items-start gap-4 text-sm text-muted">
+                    <span className="font-display text-xl font-bold leading-none text-brand/30">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="pt-0.5">{step}</span>
                   </li>
@@ -86,28 +117,34 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
           </div>
 
-          {/* SIDEBAR */}
+          {/* sidebar */}
           <div className="lg:col-span-2">
-            <div className="sticky top-24 space-y-6">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-                <h3 className="text-sm font-semibold text-slate-900">{t("forWhom")}</h3>
-                <ul className="mt-2 space-y-1.5">
+            <div className="sticky top-24 space-y-5">
+              <div className="rounded-xl border border-line bg-surface-2 p-6">
+                <h3 className="text-sm font-semibold text-ink">{t("forWhom")}</h3>
+                <ul className="mt-3 space-y-2">
                   {svc.forWhom.map((item) => (
-                    <li key={item} className="text-sm text-slate-600">
-                      • {item}
+                    <li key={item} className="flex gap-2 text-sm text-muted">
+                      <span className="text-brand">—</span>
+                      {item}
                     </li>
                   ))}
                 </ul>
               </div>
               <Link
                 href="/contacto"
-                className="block w-full rounded-xl bg-blue-700 px-5 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800"
+                className="group flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-brand-strong"
               >
                 {t("cta")}
+                <Icon
+                  name="arrow"
+                  size={16}
+                  className="transition-transform group-hover:translate-x-0.5"
+                />
               </Link>
               <Link
                 href="/servicos"
-                className="block w-full rounded-xl border border-slate-300 bg-white px-5 py-3 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                className="block rounded-lg border border-line-strong bg-surface px-5 py-3 text-center text-sm font-semibold text-ink transition hover:border-ink/30"
               >
                 {t("allServices")}
               </Link>

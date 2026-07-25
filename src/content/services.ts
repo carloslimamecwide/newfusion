@@ -38,7 +38,7 @@ export const services: ServiceContent[] = [
     slug: "sites-landing-pages",
     icon: "🌐",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+      "/images/services/sites.jpg",
     pt: {
       title: "Sites e landing pages",
       short: "Presença online profissional que converte visitantes em contactos.",
@@ -98,7 +98,7 @@ export const services: ServiceContent[] = [
     slug: "web-applications",
     icon: "⚙️",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+      "/images/services/web-apps.jpg",
     pt: {
       title: "Aplicações web",
       short: "Portais, dashboards e produtos web à medida do seu processo.",
@@ -158,7 +158,7 @@ export const services: ServiceContent[] = [
     slug: "ecommerce",
     icon: "🛒",
     image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
+      "/images/services/ecommerce.jpg",
     pt: {
       title: "E-commerce",
       short: "Lojas online preparadas para vender com confiança.",
@@ -218,7 +218,7 @@ export const services: ServiceContent[] = [
     slug: "mobile-apps",
     icon: "📱",
     image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&q=80",
+      "/images/services/mobile.jpg",
     pt: {
       title: "Apps mobile",
       short: "Experiências móveis para clientes e equipas em movimento.",
@@ -278,7 +278,7 @@ export const services: ServiceContent[] = [
     slug: "integrations-apis",
     icon: "🔗",
     image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+      "/images/services/apis.jpg",
     pt: {
       title: "Integrações e APIs",
       short: "Sistemas a falar entre si — menos cópia manual, mais fiabilidade.",
@@ -338,7 +338,7 @@ export const services: ServiceContent[] = [
     slug: "maintenance-support",
     icon: "🛡️",
     image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80",
+      "/images/services/maintenance.jpg",
     pt: {
       title: "Manutenção e suporte",
       short: "O seu produto em produção com acompanhamento contínuo.",
@@ -398,7 +398,7 @@ export const services: ServiceContent[] = [
     slug: "consulting-ux",
     icon: "💡",
     image:
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80",
+      "/images/services/consulting.jpg",
     pt: {
       title: "Consultoria e UX",
       short: "Clareza antes de construir — menos desperdício, melhores decisões.",
