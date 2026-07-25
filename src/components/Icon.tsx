@@ -11,8 +11,7 @@ export type IconName =
   | "arrow"
   | "check"
   | "menu"
-  | "close"
-  | "car";
+  | "close";
 
 type Props = SVGProps<SVGSVGElement> & {
   name: IconName;
@@ -67,14 +66,6 @@ const paths: Record<IconName, React.ReactNode> = {
   check: <path d="m5 13 4 4L19 7" />,
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   close: <path d="M6 6l12 12M18 6 6 18" />,
-  car: (
-    <>
-      <path d="M5 10a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v1H5v-1Z" />
-      <path d="M3 14v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-1h10v1a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3l-2-5H5l-2 5Z" />
-      <circle cx="7" cy="17" r="1" fill="currentColor" />
-      <circle cx="17" cy="17" r="1" fill="currentColor" />
-    </>
-  ),
 };
 
 export function Icon({ name, size = 22, ...rest }: Props) {

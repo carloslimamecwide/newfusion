@@ -3,7 +3,6 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { services } from "@/content/services";
-import { cases } from "@/content/portfolio";
 import { Section, SectionHeading } from "@/components/Section";
 import { Icon } from "@/components/Icon";
 import type { Locale } from "@/i18n/routing";
@@ -18,7 +17,6 @@ const serviceIcon: Record<string, Parameters<typeof Icon>[0]["name"]> = {
   "integrations-apis": "link",
   "maintenance-support": "shield",
   "consulting-ux": "bulb",
-  automotive: "car",
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -33,8 +31,15 @@ export default async function HomePage({ params }: Props) {
   const t = await getTranslations("home");
   const loc = locale as Locale;
 
-  const featured = cases[0];
-  const secondary = cases.slice(1);
+  const pricingCategories = [
+    { key: "sites", icon: "globe" as const },
+    { key: "apps", icon: "app" as const },
+    { key: "ecom", icon: "cart" as const },
+    { key: "mobile", icon: "mobile" as const },
+    { key: "integrations", icon: "link" as const },
+    { key: "maintenance", icon: "shield" as const },
+    { key: "consulting", icon: "bulb" as const },
+  ];
 
   return (
     <>
@@ -43,10 +48,15 @@ export default async function HomePage({ params }: Props) {
         <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24 lg:grid-cols-12 lg:gap-8">
           {/* left: copy */}
           <div className="lg:col-span-6 lg:pt-6">
-            <p className="reveal inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              <span className="h-px w-8 bg-brand" aria-hidden />
-              {t("heroEyebrow")}
-            </p>
+            <div className="reveal flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-1 rounded-full bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
+                {t("heroTag")}
+              </span>
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+                <span className="h-px w-8 bg-brand" aria-hidden />
+                {t("heroEyebrow")}
+              </p>
+            </div>
             <h1 className="reveal reveal-1 mt-5 max-w-xl text-4xl font-bold leading-[1.02] tracking-tight sm:text-5xl lg:text-[3.6rem]">
               {t("heroTitle")}
             </h1>
@@ -175,85 +185,43 @@ export default async function HomePage({ params }: Props) {
         </div>
       </Section>
 
-      {/* ============ WORK — featured + compact ============ */}
+      {/* ============ PRICING PREVIEW ============ */}
       <Section>
         <SectionHeading
-          title={t("portfolioTitle")}
-          subtitle={t("portfolioSubtitle")}
+          title={locale === "pt" ? "Investimento" : "Investment"}
+          subtitle={locale === "pt" ? "Faixas de mercado para cada tipo de projecto. O valor exacto depende do âmbito." : "Market ranges for each project type. The exact amount depends on scope."}
         />
-
-        {/* featured case */}
-        <Link
-          href="/portfolio"
-          className="group grid overflow-hidden rounded-2xl border border-line bg-surface lg:grid-cols-2"
-        >
-          <div className="relative order-first aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[22rem]">
-            <Image
-              src={featured.image}
-              alt={featured[loc].title}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover transition duration-500 group-hover:scale-105"
-            />
-          </div>
-          <div className="flex flex-col justify-center p-7 sm:p-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">
-              {featured[loc].client}
-            </p>
-            <h3 className="mt-2 font-display text-2xl font-bold text-ink transition group-hover:text-brand sm:text-3xl">
-              {featured[loc].title}
-            </h3>
-            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
-              {featured[loc].result}
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {featured[loc].stack.slice(0, 4).map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-md bg-surface-2 px-2.5 py-1 text-xs font-medium text-muted"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </Link>
-
-        {/* secondary cases */}
-        <div className="mt-6 grid gap-6 sm:grid-cols-2">
-          {secondary.map((c) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {pricingCategories.slice(0, 6).map((cat) => (
             <Link
-              key={c.slug}
-              href="/portfolio"
-              className="group flex gap-5 rounded-2xl border border-line bg-surface p-5 transition hover:shadow-md"
+              key={cat.key}
+              href="/precos"
+              className="group flex items-center gap-4 rounded-xl border border-line bg-surface p-4 transition hover:border-line-strong hover:shadow-sm"
             >
-              <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-lg sm:h-28 sm:w-40">
-                <Image
-                  src={c.image}
-                  alt={c[loc].title}
-                  fill
-                  sizes="10rem"
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand">
+                <Icon name={cat.icon} size={20} />
+              </span>
               <div className="min-w-0">
-                <h3 className="font-display text-base font-semibold text-ink transition group-hover:text-brand">
-                  {c[loc].title}
-                </h3>
-                <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted">
-                  {c[loc].result}
+                <p className="font-display text-sm font-semibold text-ink transition group-hover:text-brand">
+                  {locale === "pt"
+                    ? ({ sites: "Sites", apps: "Apps web", ecom: "E-commerce", mobile: "Mobile", integrations: "Integrações", maintenance: "Manutenção", consulting: "Consultoria" } as const)[cat.key]
+                    : ({ sites: "Websites", apps: "Web apps", ecom: "E-commerce", mobile: "Mobile", integrations: "Integrations", maintenance: "Maintenance", consulting: "Consulting" } as const)[cat.key]}
+                </p>
+                <p className="mt-0.5 text-xs font-semibold text-brand">
+                  {locale === "pt"
+                    ? ({ sites: "500 € – 3 000 €", apps: "3 000 € – 15 000 €", ecom: "2 000 € – 10 000 €", mobile: "5 000 € – 25 000 €", integrations: "1 000 € – 8 000 €", maintenance: "200 € – 800 €/mês", consulting: "80 € – 150 €/h" } as const)[cat.key]
+                    : ({ sites: "€500 – €3,000", apps: "€3,000 – €15,000", ecom: "€2,000 – €10,000", mobile: "€5,000 – €25,000", integrations: "€1,000 – €8,000", maintenance: "€200 – €800/mo", consulting: "€80 – €150/hr" } as const)[cat.key]}
                 </p>
               </div>
             </Link>
           ))}
         </div>
-
-        <div className="mt-12">
+        <div className="mt-8">
           <Link
-            href="/portfolio"
+            href="/precos"
             className="group inline-flex items-center gap-2 text-sm font-semibold text-brand"
           >
-            {t("portfolioCta")}
+            {locale === "pt" ? "Ver todos os preços" : "View all pricing"}
             <Icon
               name="arrow"
               size={17}

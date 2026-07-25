@@ -20,7 +20,6 @@ const serviceIcon: Record<string, Parameters<typeof Icon>[0]["name"]> = {
   "integrations-apis": "link",
   "maintenance-support": "shield",
   "consulting-ux": "bulb",
-  automotive: "car",
 };
 
 export async function generateStaticParams() {

@@ -14,6 +14,10 @@ export const routing = defineRouting({
       pt: "/servicos/[slug]",
       en: "/services/[slug]",
     },
+    "/precos": {
+      pt: "/precos",
+      en: "/pricing",
+    },
     "/portfolio": "/portfolio",
     "/sobre": {
       pt: "/sobre",

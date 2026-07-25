@@ -21,7 +21,7 @@ export function Header() {
 
   const links = [
     { href: "/servicos" as const, label: t("services") },
-    { href: "/portfolio" as const, label: t("portfolio") },
+    { href: "/precos" as const, label: t("pricing") },
     { href: "/sobre" as const, label: t("about") },
     { href: "/contacto" as const, label: t("contact") },
   ];
