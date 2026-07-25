@@ -5,7 +5,8 @@ export type ServiceSlug =
   | "mobile-apps"
   | "integrations-apis"
   | "maintenance-support"
-  | "consulting-ux";
+  | "consulting-ux"
+  | "automotive";
 
 export type ServiceContent = {
   slug: ServiceSlug;
@@ -34,6 +35,66 @@ export type ServiceContent = {
 };
 
 export const services: ServiceContent[] = [
+  {
+    slug: "automotive",
+    icon: "🚗",
+    image:
+      "/images/services/automotive.jpg",
+    pt: {
+      title: "Sites para stands e oficinas",
+      short: "Presença digital moderna para stands de carros e oficinas — com stock online e WhatsApp.",
+      description:
+        "A maioria dos stands e oficinas usa o mesmo template WordPress genérico. Oferecemos sites personalizados, rápidos e pensados para vender — com catálogo de viaturas, contacto directo por WhatsApp e optimização para aparecer nas pesquisas locais.",
+      forWhom: [
+        "Stands de carros novos e usados",
+        "Oficinas e berbarias independentes",
+        "Vendedores de viaturas particulares",
+      ],
+      includes: [
+        "Design personalizado (não um template)",
+        "Catálogo de stock com fotos e filtros",
+        "WhatsApp integrado e destaque",
+        "SEO local (Google Maps, pesquisas perto de si)",
+        "Painel simples para gerir viaturas",
+      ],
+      process: [
+        "Briefing e levantamento de stock",
+        "Design da marca e catálogo",
+        "Integração WhatsApp e SEO local",
+        "Lançamento e formação",
+      ],
+      seoTitle: "Sites para stands de carros e oficinas",
+      seoDescription:
+        "Sites profissionais para stands e oficinas — com catálogo de stock, WhatsApp, SEO local e design exclusivo. Destaque-se dos templates genéricos.",
+    },
+    en: {
+      title: "Websites for dealerships & auto shops",
+      short: "Modern digital presence for car dealerships and auto shops — with online stock and WhatsApp.",
+      description:
+        "Most dealerships and auto shops use the same generic WordPress template. We build custom, fast websites designed to sell — with vehicle catalogues, direct WhatsApp contact, and local SEO optimisation.",
+      forWhom: [
+        "New and used car dealerships",
+        "Independent auto repair shops",
+        "Private vehicle sellers",
+      ],
+      includes: [
+        "Custom design (not a template)",
+        "Stock catalogue with photos and filters",
+        "Integrated WhatsApp",
+        "Local SEO (Google Maps, near me)",
+        "Simple dashboard to manage vehicles",
+      ],
+      process: [
+        "Briefing and stock audit",
+        "Brand and catalogue design",
+        "WhatsApp and local SEO integration",
+        "Launch and handoff",
+      ],
+      seoTitle: "Websites for car dealerships and auto shops",
+      seoDescription:
+        "Professional websites for dealerships and auto shops — with stock catalogue, WhatsApp, local SEO, and unique design. Stand out from generic templates.",
+    },
+  },
   {
     slug: "sites-landing-pages",
     icon: "🌐",
