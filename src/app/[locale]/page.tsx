@@ -89,7 +89,7 @@ export default async function HomePage({ params }: Props) {
             <div className="reveal reveal-2 relative ml-auto aspect-[4/3] w-full max-w-xl overflow-hidden rounded-2xl lg:aspect-[5/4]">
               <Image
                 src="/images/hero/hero-main.jpg"
-                alt={locale === "pt" ? "Ferramentas de trabalho do estúdio" : "Studio work tools"}
+                alt={locale === "pt" ? "Área de trabalho de desenvolvimento web" : "Web development workspace"}
                 fill
                 priority
                 fetchPriority="high"

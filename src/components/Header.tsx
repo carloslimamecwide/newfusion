@@ -93,21 +93,21 @@ export function Header() {
                 {l.label}
               </Link>
             ))}
-            <div className="flex items-center gap-2 pt-3">
+            <div className="flex flex-col gap-3 pt-3">
               <button
                 type="button"
                 onClick={() => {
                   setOpen(false);
                   switchLocale();
                 }}
-                className="rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-wider text-faint"
+                className="self-start rounded-md px-3 py-2 text-xs font-semibold uppercase tracking-wider text-faint"
               >
                 {other}
               </button>
               <Link
                 href="/contacto"
                 onClick={() => setOpen(false)}
-                className="flex-1 rounded-lg bg-brand px-4 py-2.5 text-center text-sm font-semibold text-white"
+                className="rounded-lg bg-brand px-4 py-2.5 text-center text-sm font-semibold text-white"
               >
                 {t("cta")}
               </Link>
