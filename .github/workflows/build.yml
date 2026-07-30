@@ -76,7 +76,7 @@ jobs:
           TAG: ${{ needs.build.outputs.sha }}
         run: |
           echo "Deploying $TAG..."
-          cp docker-compose.production.yml /srv/apps/webfusionlab/docker-compose.production.yml
+          cp docker-compose.production.yml /srv/apps/webfusionlab/docker-compose.yml
           cd /srv/apps/webfusionlab
           docker compose pull
           docker compose up -d --remove-orphans
