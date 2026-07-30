@@ -48,14 +48,6 @@ jobs:
         run: |
           echo "Deploying image with sha ${{ needs.build.outputs.sha }}..."
           cd /srv/apps/webfusionlab
-          echo "GHCR_PAT=${{ secrets.GHCR_PAT }}" > .env
-          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" >> .env
-          echo "CONTACT_FROM=${{ secrets.CONTACT_FROM }}" >> .env
-          echo "CONTACT_TO=${{ secrets.CONTACT_TO }}" >> .env
-          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}" >> .env
-          echo "NEXT_PUBLIC_WHATSAPP_NUMBER=${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}" >> .env
-          echo "NEXT_PUBLIC_CALENDLY_URL=${{ secrets.NEXT_PUBLIC_CALENDLY_URL }}" >> .env
-          chmod 660 .env
           docker compose -f docker-compose.production.yml pull
           docker compose -f docker-compose.production.yml up -d --remove-orphans
           docker image prune -f
