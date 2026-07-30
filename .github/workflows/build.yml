@@ -68,8 +68,19 @@ jobs:
   deploy:
     needs: build
     runs-on: self-hosted
+    environment: production
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create .env
+        run: |
+          echo "RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}" > /srv/apps/webfusionlab/.env
+          echo "CONTACT_FROM=${{ secrets.CONTACT_FROM }}" >> /srv/apps/webfusionlab/.env
+          echo "CONTACT_TO=${{ secrets.CONTACT_TO }}" >> /srv/apps/webfusionlab/.env
+          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}" >> /srv/apps/webfusionlab/.env
+          echo "NEXT_PUBLIC_WHATSAPP_NUMBER=${{ secrets.NEXT_PUBLIC_WHATSAPP_NUMBER }}" >> /srv/apps/webfusionlab/.env
+          echo "NEXT_PUBLIC_CALENDLY_URL=${{ secrets.NEXT_PUBLIC_CALENDLY_URL }}" >> /srv/apps/webfusionlab/.env
+          chmod 660 /srv/apps/webfusionlab/.env
 
       - name: Deploy to VPS
         env:
