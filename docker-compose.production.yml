@@ -1,11 +1,12 @@
 services:
   web:
-    image: ghcr.io/carloslimamecwide/webfusionlab:latest
+    image: ghcr.io/carloslimamecwide/newfusion:${TAG:-latest}
     container_name: webfusionlab-web
     restart: unless-stopped
     env_file: .env
     networks:
       - apps
+      - data
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
       interval: 30s
@@ -14,4 +15,6 @@ services:
 
 networks:
   apps:
+    external: true
+  data:
     external: true
