@@ -3,26 +3,27 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { services } from "@/content/services";
+import { getCaseImageAlt, publishedCases } from "@/content/portfolio";
 import { Section, SectionHeading } from "@/components/Section";
+import { ProjectMosaic } from "@/components/ProjectMosaic";
 import { Icon } from "@/components/Icon";
 import type { Locale } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const serviceIcon: Record<string, Parameters<typeof Icon>[0]["name"]> = {
-  "sites-landing-pages": "globe",
-  "web-applications": "app",
-  ecommerce: "cart",
-  "mobile-apps": "mobile",
-  "integrations-apis": "link",
-  "maintenance-support": "shield",
-  "consulting-ux": "bulb",
-};
+const primaryServiceSlugs = ["sites-landing-pages", "ecommerce", "web-applications"];
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
-  return { title: t("heroTitle"), description: t("heroSubtitle") };
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    openGraph: {
+      title: t("metaTitle"),
+      description: t("metaDescription"),
+    },
+  };
 }
 
 export default async function HomePage({ params }: Props) {
@@ -30,249 +31,230 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("home");
   const loc = locale as Locale;
-
-  const pricingCategories = [
-    { key: "sites", icon: "globe" as const },
-    { key: "apps", icon: "app" as const },
-    { key: "ecom", icon: "cart" as const },
-    { key: "mobile", icon: "mobile" as const },
-    { key: "integrations", icon: "link" as const },
-    { key: "maintenance", icon: "shield" as const },
-    { key: "consulting", icon: "bulb" as const },
-  ];
+  const primaryServices = services.filter((service) => primaryServiceSlugs.includes(service.slug));
 
   return (
     <>
-      {/* ============ HERO — asymmetric, editorial ============ */}
-      <section className="relative overflow-hidden border-b border-line">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24 lg:grid-cols-12 lg:gap-8">
-          {/* left: copy */}
-          <div className="lg:col-span-6 lg:pt-6">
-            <div className="reveal flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-1 rounded-full bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
-                {t("heroTag")}
-              </span>
-              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-                <span className="h-px w-8 bg-brand" aria-hidden />
-                {t("heroEyebrow")}
-              </p>
-            </div>
-            <h1 className="reveal reveal-1 mt-5 max-w-xl text-4xl font-bold leading-[1.02] tracking-tight sm:text-5xl lg:text-[3.6rem]">
+      <section className="hero-grid border-b border-line px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20">
+        <div className="mx-auto max-w-[var(--container)]">
+          <div className="hero-reveal flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="eyebrow">{t("heroEyebrow")}</p>
+            <p className="text-sm text-fg-muted">{t("heroMeta")}</p>
+          </div>
+
+          <div className="mt-12 grid gap-9 lg:grid-cols-12 lg:items-end">
+            <h1 className="display-title hero-reveal hero-reveal-delay-1 lg:col-span-8">
               {t("heroTitle")}
             </h1>
-            <p className="reveal reveal-2 mt-6 max-w-lg text-lg leading-relaxed text-muted">
-              {t("heroSubtitle")}
-            </p>
-            <div className="reveal reveal-3 mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="/contacto"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-strong"
-              >
-                {t("heroCta")}
-                <Icon
-                  name="arrow"
-                  size={17}
-                  className="transition-transform group-hover:translate-x-0.5"
-                />
-              </Link>
-              <Link
-                href="/servicos"
-                className="inline-flex items-center justify-center rounded-lg border border-line-strong bg-surface px-7 py-3.5 text-sm font-semibold text-ink transition hover:border-ink/30"
-              >
-                {t("heroSecondary")}
-              </Link>
+            <div className="hero-reveal hero-reveal-delay-2 lg:col-span-4 lg:pb-2">
+              <p className="body-copy">{t("heroSubtitle")}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                <Link href="/contacto" className="button-primary">
+                  {t("heroCta")}
+                  <Icon name="arrow" size={17} />
+                </Link>
+                <a href="#trabalho" className="button-secondary">
+                  {t("heroSecondary")}
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* right: image composition */}
-          <div className="relative lg:col-span-6">
-            <div className="reveal reveal-2 relative ml-auto aspect-[4/3] w-full max-w-xl overflow-hidden rounded-2xl lg:aspect-[5/4]">
-              <Image
-                src="/images/hero/hero-main.jpg"
-                alt={locale === "pt" ? "Área de trabalho de desenvolvimento web" : "Web development workspace"}
-                fill
-                priority
-                fetchPriority="high"
-                sizes="(max-width: 1024px) 100vw, 46vw"
-                className="object-cover"
-              />
-            </div>
-            {/* floating texture card */}
-            <div className="reveal reveal-3 relative -mt-16 ml-4 hidden aspect-[4/5] w-40 overflow-hidden rounded-xl border-4 border-paper shadow-lg sm:block lg:absolute lg:-bottom-10 lg:left-0 lg:ml-0 lg:mt-0 lg:w-48">
-              <Image
-                src="/images/hero/hero-texture.jpg"
-                alt=""
-                fill
-                sizes="12rem"
-                className="object-cover"
-              />
-            </div>
+          <div className="hero-reveal hero-reveal-delay-2 mt-14 sm:mt-20">
+            <ProjectMosaic locale={loc} />
           </div>
         </div>
       </section>
 
-      {/* ============ TRUST STRIP ============ */}
       <section className="border-b border-line bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3 sm:px-6">
-          {([1, 2, 3] as const).map((n) => (
-            <div key={n} className="flex flex-col gap-1.5">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand">
-                {t(`proof${n}Title`)}
+        <div className="mx-auto grid max-w-[var(--container)] divide-y divide-line px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8">
+          {([1, 2, 3] as const).map((item) => (
+            <div key={item} className="py-7 sm:px-7 sm:first:pl-0 sm:last:pr-0">
+              <p className="text-xs font-semibold uppercase tracking-[0.13em] text-brand">
+                {t(`proof${item}Label`)}
               </p>
-              <p className="text-sm leading-relaxed text-muted">
-                {t(`proof${n}Text`)}
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">{t(`proof${item}Text`)}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ============ SERVICES — editorial list, not identical cards ============ */}
-      <Section>
+      <Section id="trabalho" className="border-b border-line">
         <SectionHeading
+          eyebrow={t("workEyebrow")}
+          title={t("workTitle")}
+          subtitle={t("workSubtitle")}
+        />
+
+        {publishedCases.length > 0 ? (
+          <div className="space-y-20">
+            {publishedCases.slice(0, 3).map((item, index) => (
+              <article key={item.slug} className="grid gap-8 lg:grid-cols-12 lg:items-end">
+                <Link
+                  href={{ pathname: "/portfolio/[slug]", params: { slug: item.slug } }}
+                  className={`group relative min-h-80 overflow-hidden rounded-xl border border-line bg-surface lg:col-span-8 ${
+                    index % 2 === 1 ? "lg:col-start-5" : ""
+                  }`}
+                >
+                  <Image
+                    src={item.cover.src}
+                    alt={getCaseImageAlt(item.cover, loc)}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    className="object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className={`lg:col-span-4 ${index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
+                  <p className="eyebrow">{item[loc].clientLabel}</p>
+                  <h3 className="mt-4 font-display text-3xl font-semibold leading-none tracking-[-0.04em]">
+                    {item[loc].title}
+                  </h3>
+                  <p className="mt-5 leading-relaxed text-fg-muted">{item[loc].summary}</p>
+                  <Link
+                    href={{ pathname: "/portfolio/[slug]", params: { slug: item.slug } }}
+                    className="mt-7 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-brand"
+                  >
+                    {t("viewCase")}
+                    <Icon name="arrow" size={17} />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-8 border-y border-line py-10 sm:py-14 lg:grid-cols-12 lg:items-end">
+            <p className="font-display text-3xl font-semibold leading-none tracking-[-0.04em] lg:col-span-6 sm:text-5xl">
+              {t("workPendingTitle")}
+            </p>
+            <div className="lg:col-span-5 lg:col-start-8">
+              <p className="leading-relaxed text-fg-muted">{t("workPendingText")}</p>
+              <Link href="/contacto" className="mt-6 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-brand">
+                {t("workPendingCta")}
+                <Icon name="arrow" size={17} />
+              </Link>
+            </div>
+          </div>
+        )}
+      </Section>
+
+      <Section id="servicos" className="border-b border-line bg-surface">
+        <SectionHeading
+          eyebrow={t("servicesEyebrow")}
           title={t("servicesTitle")}
           subtitle={t("servicesSubtitle")}
         />
-        <div className="divide-y divide-line border-y border-line">
-          {services.map((s, i) => (
-            <Link
-              key={s.slug}
-              href={{ pathname: "/servicos/[slug]", params: { slug: s.slug } }}
-              className="group grid items-center gap-4 py-6 transition sm:grid-cols-[auto_1fr_auto] sm:gap-8 sm:py-7"
-            >
-              <div className="flex items-center gap-5">
-                <span className="font-display text-sm font-bold tabular-nums text-faint">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-soft text-brand">
-                  <Icon name={serviceIcon[s.slug]} size={22} />
-                </span>
-                <h3 className="font-display text-lg font-semibold text-ink transition group-hover:text-brand sm:text-xl">
-                  {s[loc].title}
-                </h3>
-              </div>
-              <p className="hidden max-w-md text-sm leading-relaxed text-muted md:block">
-                {s[loc].short}
-              </p>
-              <span className="hidden text-brand opacity-0 transition group-hover:opacity-100 sm:block">
-                <Icon name="arrow" size={20} />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Section>
 
-      {/* ============ PROCESS — typographic numbers ============ */}
-      <Section className="bg-surface-2">
-        <SectionHeading
-          title={t("processTitle")}
-          subtitle={t("processSubtitle")}
-        />
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {([1, 2, 3, 4] as const).map((n) => (
-            <div key={n} className="relative">
-              <p className="font-display text-6xl font-bold leading-none text-brand/15 lg:text-7xl">
-                {n}
-              </p>
-              <h3 className="mt-3 font-display text-base font-semibold text-ink">
-                {t(`process${n}Title`)}
+        <div className="border-y border-line">
+          {primaryServices.map((service, index) => (
+            <Link
+              key={service.slug}
+              href={{ pathname: "/servicos/[slug]", params: { slug: service.slug } }}
+              className="group grid gap-5 border-b border-line py-8 last:border-b-0 md:grid-cols-12 md:items-center"
+            >
+              <span className="text-sm font-semibold tabular-nums text-fg-subtle md:col-span-1">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-display text-3xl font-semibold leading-none tracking-[-0.04em] transition-colors group-hover:text-brand md:col-span-5 sm:text-4xl">
+                {service[loc].title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                {t(`process${n}Text`)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ============ PRICING PREVIEW ============ */}
-      <Section>
-        <SectionHeading
-          title={locale === "pt" ? "Investimento" : "Investment"}
-          subtitle={locale === "pt" ? "Faixas de mercado para cada tipo de projecto. O valor exacto depende do âmbito." : "Market ranges for each project type. The exact amount depends on scope."}
-        />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {pricingCategories.slice(0, 6).map((cat) => (
-            <Link
-              key={cat.key}
-              href="/precos"
-              className="group flex items-center gap-4 rounded-xl border border-line bg-surface p-4 transition hover:border-line-strong hover:shadow-sm"
-            >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand">
-                <Icon name={cat.icon} size={20} />
+              <p className="max-w-xl leading-relaxed text-fg-muted md:col-span-5">{service[loc].short}</p>
+              <span className="flex h-12 w-12 items-center justify-center justify-self-start rounded-full border border-line text-brand transition group-hover:border-brand md:justify-self-end">
+                <Icon name="arrow" size={18} />
               </span>
-              <div className="min-w-0">
-                <p className="font-display text-sm font-semibold text-ink transition group-hover:text-brand">
-                  {locale === "pt"
-                    ? ({ sites: "Sites", apps: "Apps web", ecom: "E-commerce", mobile: "Mobile", integrations: "Integrações", maintenance: "Manutenção", consulting: "Consultoria" } as const)[cat.key]
-                    : ({ sites: "Websites", apps: "Web apps", ecom: "E-commerce", mobile: "Mobile", integrations: "Integrations", maintenance: "Maintenance", consulting: "Consulting" } as const)[cat.key]}
-                </p>
-                <p className="mt-0.5 text-xs font-semibold text-brand">
-                  {locale === "pt"
-                    ? ({ sites: "500 € – 3 000 €", apps: "3 000 € – 15 000 €", ecom: "2 000 € – 10 000 €", mobile: "5 000 € – 25 000 €", integrations: "1 000 € – 8 000 €", maintenance: "200 € – 800 €/mês", consulting: "80 € – 150 €/h" } as const)[cat.key]
-                    : ({ sites: "€500 – €3,000", apps: "€3,000 – €15,000", ecom: "€2,000 – €10,000", mobile: "€5,000 – €25,000", integrations: "€1,000 – €8,000", maintenance: "€200 – €800/mo", consulting: "€80 – €150/hr" } as const)[cat.key]}
-                </p>
-              </div>
             </Link>
           ))}
         </div>
-        <div className="mt-8">
-          <Link
-            href="/precos"
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-brand"
-          >
-            {locale === "pt" ? "Ver todos os preços" : "View all pricing"}
-            <Icon
-              name="arrow"
-              size={17}
-              className="transition-transform group-hover:translate-x-0.5"
-            />
-          </Link>
+
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-2xl text-sm leading-relaxed text-fg-muted">{t("secondaryServices")}</p>
+          <Link href="/servicos" className="button-secondary shrink-0">{t("allServices")}</Link>
         </div>
       </Section>
 
-      {/* ============ WHY — dense, not 4 identical cards ============ */}
-      <Section className="border-t border-line bg-surface">
-        <SectionHeading title={t("whyTitle")} />
-        <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
-          {([1, 2, 3, 4] as const).map((n) => (
-            <div key={n} className="flex gap-4">
-              <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-brand-soft text-brand">
-                <Icon name="check" size={16} />
-              </span>
-              <div>
-                <h3 className="font-display text-base font-semibold text-ink">
-                  {t(`why${n}Title`)}
-                </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                  {t(`why${n}Text`)}
-                </p>
-              </div>
+      <Section id="processo" className="border-b border-line">
+        <div className="grid gap-16 lg:grid-cols-12">
+          <SectionHeading
+            eyebrow={t("processEyebrow")}
+            title={t("processTitle")}
+            subtitle={t("processSubtitle")}
+          />
+          <ol className="divide-y divide-line border-y border-line lg:col-span-7 lg:col-start-6">
+            {([1, 2, 3, 4] as const).map((item) => (
+              <li key={item} className="grid grid-cols-[3rem_1fr] gap-5 py-7 sm:grid-cols-[4rem_1fr]">
+                <span className="font-display text-2xl font-semibold text-brand">0{item}</span>
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-fg">{t(`process${item}Title`)}</h3>
+                  <p className="mt-2 max-w-xl leading-relaxed text-fg-muted">{t(`process${item}Text`)}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </Section>
+
+      <Section className="border-b border-line bg-surface">
+        <SectionHeading
+          eyebrow={t("pricingEyebrow")}
+          title={t("pricingTitle")}
+          subtitle={t("pricingSubtitle")}
+        />
+        <div className="border-y border-line">
+          {(["sites", "ecommerce", "apps"] as const).map((key, index) => (
+            <div key={key} className="grid gap-3 border-b border-line py-7 last:border-b-0 sm:grid-cols-12 sm:items-baseline">
+              <span className="text-sm tabular-nums text-fg-subtle sm:col-span-1">0{index + 1}</span>
+              <h3 className="font-display text-2xl font-semibold tracking-[-0.03em] sm:col-span-5 sm:text-3xl">{t(`price${key}Title`)}</h3>
+              <p className="text-fg-muted sm:col-span-3">{t(`price${key}Text`)}</p>
+              <p className="font-display text-xl font-semibold text-brand sm:col-span-3 sm:text-right">{t(`price${key}Value`)}</p>
             </div>
+          ))}
+        </div>
+        <Link href="/precos" className="button-secondary mt-8">{t("pricingCta")}</Link>
+      </Section>
+
+      <Section className="border-b border-line">
+        <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <p className="eyebrow mb-5">{t("studioEyebrow")}</p>
+            <h2 className="section-title">{t("studioTitle")}</h2>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9">
+            <p className="body-copy">{t("studioText")}</p>
+            <Link href="/sobre" className="mt-7 inline-flex min-h-12 items-center gap-2 text-sm font-semibold text-brand">
+              {t("studioCta")}
+              <Icon name="arrow" size={17} />
+            </Link>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="border-b border-line bg-surface">
+        <SectionHeading eyebrow={t("faqEyebrow")} title={t("faqTitle")} />
+        <div className="mx-auto max-w-4xl border-y border-line">
+          {([1, 2, 3, 4] as const).map((item) => (
+            <details key={item} name="home-faq" className="group border-b border-line last:border-b-0">
+              <summary className="flex min-h-16 cursor-pointer items-center justify-between gap-5 py-5 text-lg font-semibold text-fg">
+                {t(`faq${item}Question`)}
+                <span className="text-2xl font-light text-brand transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p className="max-w-3xl pb-7 leading-relaxed text-fg-muted">{t(`faq${item}Answer`)}</p>
+            </details>
           ))}
         </div>
       </Section>
 
-      {/* ============ CTA — drenched brand block ============ */}
-      <Section className="bg-brand-ink-2">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight text-white sm:text-4xl">
-            {t("ctaTitle")}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/70">
-            {t("ctaText")}
-          </p>
-          <Link
-            href="/contacto"
-            className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-brand-ink-2 shadow-sm transition hover:bg-white/90"
-          >
-            {t("ctaButton")}
-            <Icon
-              name="arrow"
-              size={17}
-              className="transition-transform group-hover:translate-x-0.5"
-            />
-          </Link>
+      <Section className="bg-brand text-bg">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+          <h2 className="section-title lg:col-span-8">{t("ctaTitle")}</h2>
+          <div className="lg:col-span-4">
+            <p className="max-w-md leading-relaxed text-bg/75">{t("ctaText")}</p>
+            <Link
+              href="/contacto"
+              className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-bg px-6 py-3.5 text-sm font-semibold text-fg transition hover:bg-surface"
+            >
+              {t("ctaButton")}
+              <Icon name="arrow" size={17} />
+            </Link>
+          </div>
         </div>
       </Section>
     </>

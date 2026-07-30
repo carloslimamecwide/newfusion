@@ -3,21 +3,16 @@ import { Section } from "@/components/Section";
 
 export default function NotFound() {
   return (
-    <Section className="flex min-h-[60vh] items-center justify-center text-center">
-      <div>
-        <p className="font-display text-7xl font-bold text-line">404</p>
-        <h1 className="mt-4 font-display text-xl font-semibold text-ink">
-          Página não encontrada
-        </h1>
-        <p className="mt-2 text-sm text-muted">
-          The page you are looking for does not exist.
-        </p>
-        <Link
-          href="/"
-          className="mt-6 inline-block rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-strong"
-        >
-          Voltar ao início
-        </Link>
+    <Section className="hero-grid flex min-h-[70vh] items-center border-b border-line">
+      <div className="grid w-full gap-10 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-8">
+          <p className="eyebrow">Erro 404</p>
+          <h1 className="page-title mt-6">Esta página saiu do mapa.</h1>
+        </div>
+        <div className="lg:col-span-4">
+          <p className="leading-relaxed text-fg-muted">The page you are looking for does not exist or is no longer available.</p>
+          <Link href="/" className="button-primary mt-7">Voltar ao início</Link>
+        </div>
       </div>
     </Section>
   );

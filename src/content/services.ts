@@ -43,7 +43,7 @@ export const services: ServiceContent[] = [
       title: "Sites e landing pages",
       short: "Presença online profissional que converte visitantes em contactos.",
       description:
-        "Desenhamos e desenvolvemos websites e landing pages rápidas, acessíveis e optimizadas para SEO — pensadas para o seu mercado e objectivos de negócio.",
+        "Desenhamos e desenvolvemos websites e landing pages rápidas, acessíveis e optimizadas para SEO, pensadas para o seu mercado e objectivos de negócio.",
       forWhom: [
         "PME e comércio local",
         "Empresas que precisam de redesign",
@@ -223,7 +223,7 @@ export const services: ServiceContent[] = [
       title: "Apps mobile",
       short: "Experiências móveis para clientes e equipas em movimento.",
       description:
-        "Desenvolvemos aplicações mobile (nativas ou cross-platform) quando o telemóvel é o canal principal — com UX clara e backends sólidos.",
+        "Desenvolvemos aplicações mobile (nativas ou cross-platform) quando o telemóvel é o canal principal, com UX clara e backends sólidos.",
       forWhom: [
         "Produtos com uso diário em mobile",
         "Field service e operações",
@@ -250,7 +250,7 @@ export const services: ServiceContent[] = [
       title: "Mobile apps",
       short: "Mobile experiences for customers and teams on the move.",
       description:
-        "We build mobile apps (native or cross-platform) when the phone is the main channel — with clear UX and solid backends.",
+        "We build mobile apps (native or cross-platform) when the phone is the main channel, with clear UX and solid backends.",
       forWhom: [
         "Products with daily mobile use",
         "Field service and operations",
@@ -281,7 +281,7 @@ export const services: ServiceContent[] = [
       "/images/services/apis.jpg",
     pt: {
       title: "Integrações e APIs",
-      short: "Sistemas a falar entre si — menos cópia manual, mais fiabilidade.",
+      short: "Sistemas a falar entre si: menos cópia manual, mais fiabilidade.",
       description:
         "Ligamos o seu software a ERPs, CRMs, pagamentos, moradas e serviços externos. APIs bem desenhadas e automações que poupam tempo.",
       forWhom: [
@@ -308,7 +308,7 @@ export const services: ServiceContent[] = [
     },
     en: {
       title: "Integrations & APIs",
-      short: "Systems that talk to each other — less copy-paste, more reliability.",
+      short: "Systems that talk to each other: less copy-paste, more reliability.",
       description:
         "We connect your software to ERPs, CRMs, payments, logistics, and external services. Well-designed APIs and automations that save time.",
       forWhom: [
@@ -401,7 +401,7 @@ export const services: ServiceContent[] = [
       "/images/services/consulting.jpg",
     pt: {
       title: "Consultoria e UX",
-      short: "Clareza antes de construir — menos desperdício, melhores decisões.",
+      short: "Clareza antes de construir: menos desperdício, melhores decisões.",
       description:
         "Apoiamos discovery, arquitectura de produto e UX: workshops, auditorias técnicas e roadmaps para decidir o que construir a seguir.",
       forWhom: [
@@ -428,7 +428,7 @@ export const services: ServiceContent[] = [
     },
     en: {
       title: "Consulting & UX",
-      short: "Clarity before you build — less waste, better decisions.",
+      short: "Clarity before you build: less waste, better decisions.",
       description:
         "We support discovery, product architecture, and UX: workshops, technical audits, and roadmaps so you know what to build next.",
       forWhom: [

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export function Section({
   children,
@@ -10,11 +10,8 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section
-      id={id}
-      className={`px-4 py-[var(--section-y)] sm:px-6 ${className}`}
-    >
-      <div className="mx-auto max-w-6xl">{children}</div>
+    <section id={id} className={`px-5 py-[var(--section-y)] sm:px-8 ${className}`}>
+      <div className="mx-auto max-w-[var(--container)]">{children}</div>
     </section>
   );
 }
@@ -22,26 +19,23 @@ export function Section({
 export function SectionHeading({
   title,
   subtitle,
+  eyebrow,
   align = "left",
 }: {
   title: string;
   subtitle?: string;
+  eyebrow?: string;
   align?: "left" | "center";
 }) {
   return (
     <div
-      className={`mb-12 max-w-2xl sm:mb-16 ${
+      className={`mb-14 max-w-3xl sm:mb-20 ${
         align === "center" ? "mx-auto text-center" : ""
       }`}
     >
-      <h2 className="text-3xl font-bold leading-[1.05] tracking-tight sm:text-4xl lg:text-[2.6rem]">
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-          {subtitle}
-        </p>
-      )}
+      {eyebrow && <p className="eyebrow mb-5">{eyebrow}</p>}
+      <h2 className="section-title">{title}</h2>
+      {subtitle && <p className="body-copy mt-6">{subtitle}</p>}
     </div>
   );
 }

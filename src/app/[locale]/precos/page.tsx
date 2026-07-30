@@ -12,16 +12,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: t("title"), description: t("subtitle") };
 }
 
-const categories = [
-  { key: "sites", icon: "globe" as const },
-  { key: "apps", icon: "app" as const },
-  { key: "ecom", icon: "cart" as const },
-  { key: "mobile", icon: "mobile" as const },
-  { key: "integrations", icon: "link" as const },
-  { key: "maintenance", icon: "shield" as const },
-  { key: "consulting", icon: "bulb" as const },
-];
-
 export default async function PricingPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -29,86 +19,60 @@ export default async function PricingPage({ params }: Props) {
 
   return (
     <>
+      <Section className="hero-grid border-b border-line pt-16 sm:pt-24">
+        <p className="eyebrow">{t("eyebrow")}</p>
+        <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:items-end">
+          <h1 className="page-title lg:col-span-8">{t("title")}</h1>
+          <p className="body-copy lg:col-span-4">{t("subtitle")}</p>
+        </div>
+      </Section>
+
+      <Section className="border-b border-line">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <p className="body-copy lg:col-span-4">{t("intro")}</p>
+          <div className="border-y border-line lg:col-span-7 lg:col-start-6">
+            {(["sites", "ecommerce", "apps"] as const).map((key, index) => (
+              <div key={key} className="border-b border-line py-8 last:border-b-0">
+                <div className="flex items-baseline justify-between gap-5">
+                  <span className="text-sm tabular-nums text-fg-subtle">0{index + 1}</span>
+                  <p className="font-display text-xl font-semibold text-brand sm:text-2xl">{t(`${key}Range`)}</p>
+                </div>
+                <h2 className="mt-6 font-display text-3xl font-semibold leading-none tracking-[-0.04em] sm:text-4xl">{t(key)}</h2>
+                <p className="mt-4 max-w-xl leading-relaxed text-fg-muted">{t(`${key}Desc`)}</p>
+                <p className="mt-5 text-sm text-fg-subtle">{t("included")}: {t(`${key}Includes`)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       <Section className="border-b border-line bg-surface">
-        <div className="max-w-2xl">
-          <h1 className="font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted">{t("subtitle")}</p>
-        </div>
-      </Section>
-
-      <Section>
-        <p className="max-w-2xl text-base leading-relaxed text-muted">{t("intro")}</p>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((cat) => (
-            <div
-              key={cat.key}
-              className="flex flex-col rounded-2xl border border-line bg-surface p-6"
-            >
-              <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-soft text-brand">
-                  <Icon name={cat.icon} size={20} />
-                </span>
-                <h2 className="font-display text-base font-semibold text-ink">
-                  {t(`${cat.key}`)}
-                </h2>
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="eyebrow">{t("otherLabel")}</p>
+            <h2 className="mt-5 section-title">{t("otherTitle")}</h2>
+          </div>
+          <div className="divide-y divide-line border-y border-line lg:col-span-7 lg:col-start-6">
+            {(["integrations", "maintenance", "mobile", "consulting"] as const).map((key) => (
+              <div key={key} className="flex min-h-20 items-center justify-between gap-5 py-4">
+                <p className="font-display text-xl font-semibold">{t(key)}</p>
+                <p className="text-sm text-fg-muted">{t("onRequest")}</p>
               </div>
-              <p className="mt-2 font-display text-xl font-bold tracking-tight text-brand">
-                {t(`${cat.key}Range`)}
-              </p>
-              <p className="mt-1 text-sm leading-relaxed text-muted">
-                {t(`${cat.key}Desc`)}
-              </p>
-              <div className="mt-4 flex items-start gap-2 border-t border-line pt-4">
-                <Icon name="check" size={15} className="mt-0.5 shrink-0 text-brand" />
-                <p className="text-xs leading-relaxed text-faint">
-                  {t(`${cat.key}Includes`)}
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </Section>
 
-      <Section className="bg-surface-2">
-        <div className="mx-auto max-w-xl text-center">
-          <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
-            {t("notSure")}
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted">{t("notSureText")}</p>
-          <Link
-            href="/contacto"
-            className="group mt-6 inline-flex items-center gap-2 rounded-lg bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-strong"
-          >
-            {t("notSureText")}
-            <Icon
-              name="arrow"
-              size={17}
-              className="transition-transform group-hover:translate-x-0.5"
-            />
-          </Link>
-        </div>
-      </Section>
-
-      <Section className="bg-brand-ink-2">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight text-white sm:text-4xl">
-            {t("cta")}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/70">{t("ctaText")}</p>
-          <Link
-            href="/contacto"
-            className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-brand-ink-2 shadow-sm transition hover:bg-white/90"
-          >
-            {locale === "pt" ? "Falar connosco" : "Talk to us"}
-            <Icon
-              name="arrow"
-              size={17}
-              className="transition-transform group-hover:translate-x-0.5"
-            />
-          </Link>
+      <Section className="bg-brand text-bg">
+        <div className="grid gap-9 lg:grid-cols-12 lg:items-end">
+          <h2 className="section-title lg:col-span-8">{t("cta")}</h2>
+          <div className="lg:col-span-4">
+            <p className="leading-relaxed text-bg/75">{t("ctaText")}</p>
+            <Link href="/contacto" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-bg px-6 py-3.5 text-sm font-semibold text-fg">
+              {t("ctaButton")}
+              <Icon name="arrow" size={17} />
+            </Link>
+          </div>
         </div>
       </Section>
     </>

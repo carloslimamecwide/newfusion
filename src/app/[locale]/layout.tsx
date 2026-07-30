@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
@@ -23,6 +23,11 @@ const sourceSans = Source_Sans_3({
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
+};
+
+export const viewport: Viewport = {
+  colorScheme: "dark",
+  themeColor: "#11131d",
 };
 
 export function generateStaticParams() {
@@ -54,6 +59,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("defaultTitle"),
       description: t("defaultDescription"),
     },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -66,14 +75,16 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "ProfessionalService",
     name: "WebFusionLab",
     url: getSiteUrl(),
     description:
       locale === "pt"
-        ? "Desenvolvimento web e software para PME e empresas."
-        : "Web and software development for SMEs and companies.",
+        ? "Estúdio boutique de websites, e-commerce e produtos digitais para PME e marcas."
+        : "Boutique studio for websites, e-commerce, and digital products for SMEs and brands.",
     areaServed: ["PT", "Worldwide"],
+    knowsLanguage: ["pt", "en"],
+    priceRange: "€€",
   };
 
   return (
@@ -81,7 +92,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       lang={locale}
       className={`${bricolage.variable} ${sourceSans.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col bg-paper font-body text-ink antialiased">
+      <body className="flex min-h-full flex-col bg-bg font-body text-fg antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

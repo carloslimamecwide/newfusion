@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Section } from "@/components/Section";
@@ -20,85 +19,67 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <>
-      <Section className="border-b border-line bg-surface">
-        <div className="max-w-2xl">
-          <h1 className="font-display text-4xl font-bold leading-[1.02] tracking-tight sm:text-5xl">
-            {t("title")}
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted">{t("subtitle")}</p>
+      <Section className="hero-grid border-b border-line pt-16 sm:pt-24">
+        <p className="eyebrow">{t("eyebrow")}</p>
+        <div className="mt-8 grid gap-8 lg:grid-cols-12 lg:items-end">
+          <h1 className="page-title lg:col-span-8">{t("title")}</h1>
+          <p className="body-copy lg:col-span-4">{t("subtitle")}</p>
         </div>
       </Section>
 
-      <Section>
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="space-y-10">
-            <div>
-              <h2 className="font-display text-xl font-semibold text-ink">
-                {t("missionTitle")}
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-muted">
-                {t("missionText")}
-              </p>
-            </div>
-            <div>
-              <h2 className="font-display text-xl font-semibold text-ink">
-                {t("marketsTitle")}
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-muted">
-                {t("marketsText")}
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-display text-xl font-semibold text-ink">
-                {t("valuesTitle")}
-              </h2>
-              <ul className="mt-4 space-y-3">
-                {(["value1", "value2", "value3", "value4"] as const).map((key) => (
-                  <li key={key} className="flex items-center gap-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded bg-brand-soft text-brand">
-                      <Icon name="check" size={13} />
-                    </span>
-                    <span className="text-sm font-medium text-ink">{t(key)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-surface-2 lg:sticky lg:top-24">
-            <Image
-              src="/images/about/studio.jpg"
-              alt={locale === "pt" ? "Estúdio WebFusionLab" : "WebFusionLab studio"}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </Section>
-
-      <Section className="bg-brand-ink-2">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-bold leading-[1.05] tracking-tight text-white sm:text-4xl">
-            {locale === "pt" ? "Vamos construir algo juntos?" : "Let's build something together?"}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-white/70">
-            {locale === "pt"
-              ? "Conte-nos o seu projecto. Sem compromisso."
-              : "Tell us about your project. No obligation."}
+      <Section className="border-b border-line">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <p className="eyebrow lg:col-span-3">{t("manifestoLabel")}</p>
+          <p className="font-display text-3xl font-medium leading-[1.1] tracking-[-0.035em] lg:col-span-8 lg:col-start-5 sm:text-5xl">
+            {t("manifesto")}
           </p>
-          <Link
-            href="/contacto"
-            className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3.5 text-sm font-semibold text-brand-ink-2 shadow-sm transition hover:bg-white/90"
-          >
-            {t("cta")}
-            <Icon
-              name="arrow"
-              size={17}
-              className="transition-transform group-hover:translate-x-0.5"
-            />
-          </Link>
+        </div>
+      </Section>
+
+      <Section className="border-b border-line bg-surface">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="eyebrow">{t("modelLabel")}</p>
+            <h2 className="mt-5 section-title">{t("modelTitle")}</h2>
+          </div>
+          <div className="divide-y divide-line border-y border-line lg:col-span-7 lg:col-start-6">
+            {([1, 2, 3] as const).map((item) => (
+              <div key={item} className="grid grid-cols-[3rem_1fr] gap-5 py-7">
+                <span className="font-display text-xl font-semibold text-brand">0{item}</span>
+                <div>
+                  <h3 className="font-display text-2xl font-semibold tracking-[-0.03em]">{t(`model${item}Title`)}</h3>
+                  <p className="mt-3 leading-relaxed text-fg-muted">{t(`model${item}Text`)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <Section className="border-b border-line">
+        <p className="eyebrow">{t("principlesLabel")}</p>
+        <h2 className="mt-5 section-title">{t("principlesTitle")}</h2>
+        <div className="mt-14 grid border-y border-line sm:grid-cols-2 lg:grid-cols-4">
+          {([1, 2, 3, 4] as const).map((item) => (
+            <article key={item} className="min-h-60 border-b border-line p-6 sm:border-r sm:[&:nth-last-child(-n+2)]:border-b-0 lg:border-b-0 lg:last:border-r-0">
+              <span className="text-sm tabular-nums text-brand">0{item}</span>
+              <h3 className="mt-14 font-display text-xl font-semibold">{t(`principle${item}Title`)}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-fg-muted">{t(`principle${item}Text`)}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="bg-brand text-bg">
+        <div className="grid gap-9 lg:grid-cols-12 lg:items-end">
+          <h2 className="section-title lg:col-span-8">{t("ctaTitle")}</h2>
+          <div className="lg:col-span-4">
+            <p className="leading-relaxed text-bg/75">{t("ctaText")}</p>
+            <Link href="/contacto" className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-bg px-6 py-3.5 text-sm font-semibold text-fg">
+              {t("cta")}
+              <Icon name="arrow" size={17} />
+            </Link>
+          </div>
         </div>
       </Section>
     </>
