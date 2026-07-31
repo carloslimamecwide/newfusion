@@ -3,9 +3,7 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
-import { routing, type Locale } from "@/i18n/routing";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { routing } from "@/i18n/routing";
 import { getSiteUrl } from "@/lib/site";
 
 const bricolage = Bricolage_Grotesque({
@@ -73,34 +71,14 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
   const messages = await getMessages();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: "WebFusionLab",
-    url: getSiteUrl(),
-    description:
-      locale === "pt"
-        ? "Estúdio boutique de websites, e-commerce e produtos digitais para PME e marcas."
-        : "Boutique studio for websites, e-commerce, and digital products for SMEs and brands.",
-    areaServed: ["PT", "Worldwide"],
-    knowsLanguage: ["pt", "en"],
-    priceRange: "€€",
-  };
-
   return (
     <html
       lang={locale}
       className={`${bricolage.variable} ${sourceSans.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-bg font-body text-fg antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer locale={locale as Locale} />
+          <main className="flex flex-1 flex-col">{children}</main>
         </NextIntlClientProvider>
       </body>
     </html>
