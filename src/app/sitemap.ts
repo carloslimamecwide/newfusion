@@ -1,18 +1,48 @@
 import type { MetadataRoute } from "next";
-
-const baseUrl = "https://webfusionlab.pt";
+import { services } from "@/content/services";
+import { publishedCases } from "@/content/portfolio";
+import { getSiteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const baseUrl = getSiteUrl();
+  const staticPaths = {
+    pt: ["", "/servicos", "/precos", "/portfolio", "/sobre", "/contacto"],
+    en: ["", "/services", "/pricing", "/portfolio", "/about", "/contact"],
+  } as const;
+
+  const staticEntries: MetadataRoute.Sitemap = Object.entries(staticPaths).flatMap(([locale, paths]) =>
+    paths.map((path) => ({
+      url: `${baseUrl}/${locale}${path}`,
+      changeFrequency: path === "" ? "weekly" : "monthly",
+      priority: path === "" ? 1 : path.includes("contact") || path.includes("contacto") ? 0.8 : 0.7,
+    })),
+  );
+
+  const serviceEntries: MetadataRoute.Sitemap = services.flatMap((service) => [
     {
-      url: `${baseUrl}/pt`,
+      url: `${baseUrl}/pt/servicos/${service.slug}`,
       changeFrequency: "monthly",
-      priority: 1,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/en`,
+      url: `${baseUrl}/en/services/${service.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+  ]);
+
+  const caseEntries: MetadataRoute.Sitemap = publishedCases.flatMap((item) => [
+    {
+      url: `${baseUrl}/pt/portfolio/${item.slug}`,
       changeFrequency: "monthly",
       priority: 0.8,
     },
-  ];
+    {
+      url: `${baseUrl}/en/portfolio/${item.slug}`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+  ]);
+
+  return [...staticEntries, ...serviceEntries, ...caseEntries];
 }
