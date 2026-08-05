@@ -6,9 +6,9 @@ import { Icon } from "@/components/Icon";
 import type { Locale } from "@/i18n/routing";
 
 const lineFieldClass =
-  "min-h-12 w-full rounded-none border-0 border-b border-line-strong bg-transparent px-0 py-3 text-base text-fg placeholder:text-fg-subtle focus:border-brand focus:outline-none";
+  "contact-field min-h-12 w-full rounded-none border-0 border-b border-line-strong bg-transparent px-0 py-3 text-base text-fg placeholder:text-fg-subtle focus:border-brand focus:outline-none";
 const boxFieldClass =
-  "min-h-36 w-full resize-y rounded-none border border-line-strong bg-bg px-4 py-3 text-base text-fg placeholder:text-fg-subtle focus:border-brand focus:outline-none";
+  "contact-field min-h-36 w-full resize-y rounded-none border border-line-strong bg-bg px-4 py-3 text-base text-fg placeholder:text-fg-subtle focus:border-brand focus:outline-none";
 
 type Choice = { value: string; label: string };
 type FieldName = "name" | "email" | "company" | "projectType" | "budget" | "timeline" | "message";
@@ -35,13 +35,13 @@ function ChoiceGroup({
       <legend className="text-sm font-semibold text-navy">{legend} <span className="text-danger" aria-hidden="true">*</span></legend>
       <div className="mt-3 divide-y divide-line border-y border-line">
         {choices.map((choice) => (
-          <label key={choice.value} className="flex min-h-12 cursor-pointer items-center gap-3 py-2 text-sm text-fg-muted transition-colors hover:text-fg has-[:checked]:text-navy">
-            <input className="h-5 w-5 shrink-0 accent-brand" type="radio" name={name} value={choice.value} required onChange={onChange} />
+          <label key={choice.value} className="choice-option flex min-h-12 cursor-pointer items-center gap-3 py-2 text-sm text-fg-muted hover:text-fg has-[:checked]:text-navy">
+            <input className="choice-control h-5 w-5 shrink-0 accent-brand" type="radio" name={name} value={choice.value} required onChange={onChange} />
             <span>{choice.label}</span>
           </label>
         ))}
       </div>
-      {error ? <p id={errorId} className="mt-2 text-sm text-danger">{error}</p> : null}
+      {error ? <p id={errorId} className="field-error mt-2 text-sm text-danger">{error}</p> : null}
     </fieldset>
   );
 }
@@ -88,7 +88,7 @@ function TextField({
         aria-describedby={error ? errorId : undefined}
         onInput={onInput}
       />
-      {error ? <span id={errorId} className="mt-1 font-normal text-danger">{error}</span> : null}
+      {error ? <span id={errorId} className="field-error mt-1 font-normal text-danger">{error}</span> : null}
     </label>
   );
 }
@@ -229,7 +229,7 @@ export function ContactForm() {
   }
 
   return (
-    <form action="/api/contact" method="post" onSubmit={onSubmit} className="space-y-10" noValidate>
+    <form action="/api/contact" method="post" onSubmit={onSubmit} className="hero-sequence-item hero-sequence-copy space-y-10" noValidate>
       <div className="grid gap-8 md:grid-cols-2">
         <TextField id="contact-name" name="name" label={t("name")} autoComplete="name" minLength={2} maxLength={100} required error={fieldErrors.name} onInput={() => clearField("name")} />
         <TextField id="contact-email" name="email" label={t("email")} type="email" autoComplete="email" maxLength={200} required error={fieldErrors.email} onInput={() => clearField("email")} />
@@ -258,7 +258,7 @@ export function ContactForm() {
             aria-describedby={fieldErrors.message ? "contact-message-error" : "message-hint"}
             onInput={() => clearField("message")}
           />
-          {fieldErrors.message ? <span id="contact-message-error" className="font-normal text-danger">{fieldErrors.message}</span> : <span id="message-hint" className="font-normal text-fg-subtle">{t("messageHint")}</span>}
+          {fieldErrors.message ? <span id="contact-message-error" className="field-error font-normal text-danger">{fieldErrors.message}</span> : <span id="message-hint" className="font-normal text-fg-subtle">{t("messageHint")}</span>}
         </label>
       </div>
 
@@ -274,7 +274,7 @@ export function ContactForm() {
 
       <div aria-live="polite" aria-atomic="true">
         {statusMessage ? (
-          <p role={status === "error" ? "alert" : "status"} className={`border p-4 text-sm font-semibold ${status === "ok" ? "border-success/40 bg-success/5 text-success" : "border-danger/40 bg-danger/5 text-danger"}`}>
+          <p role={status === "error" ? "alert" : "status"} className={`form-status border p-4 text-sm font-semibold ${status === "ok" ? "border-success/40 bg-success/5 text-success" : "border-danger/40 bg-danger/5 text-danger"}`}>
             {statusMessage}
           </p>
         ) : null}

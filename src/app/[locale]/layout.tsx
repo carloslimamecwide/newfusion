@@ -6,6 +6,8 @@ import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
 import { routing, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MotionObserver } from "@/components/MotionObserver";
+import { PageTransition } from "@/components/PageTransition";
 import { getSiteUrl } from "@/lib/site";
 
 const bricolage = Bricolage_Grotesque({
@@ -106,11 +108,14 @@ export default async function LocaleLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>
+          <MotionObserver />
           <a href="#main-content" className="skip-link">
             {locale === "pt" ? "Saltar para o conteúdo" : "Skip to content"}
           </a>
           <Header />
-          <main id="main-content" tabIndex={-1} className="flex-1">{children}</main>
+          <main id="main-content" tabIndex={-1} className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer locale={locale as Locale} />
         </NextIntlClientProvider>
       </body>

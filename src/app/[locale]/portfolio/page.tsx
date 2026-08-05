@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ViewTransition } from "react";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -7,6 +8,7 @@ import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { CallToAction } from "@/components/CallToAction";
 import { Icon } from "@/components/Icon";
+import { AnimatedText } from "@/components/AnimatedText";
 import { getLocalizedAlternates } from "@/lib/metadata";
 import type { Locale } from "@/i18n/routing";
 
@@ -38,12 +40,14 @@ export default async function PortfolioPage({ params }: Props) {
         {publishedCases.length > 0 ? (
           <div className="space-y-24">
             {publishedCases.map((item, index) => (
-              <article key={item.slug} className="grid gap-8 lg:grid-cols-12 lg:items-end">
+              <article key={item.slug} className="grid gap-8 lg:grid-cols-12 lg:items-end" data-reveal="rise" data-reveal-index={Math.min(index, 5)}>
                 <Link
                   href={{ pathname: "/portfolio/[slug]", params: { slug: item.slug } }}
                   className={`group relative min-h-[27rem] overflow-hidden border border-line bg-surface lg:col-span-8 sm:min-h-[36rem] ${index % 2 === 1 ? "lg:col-start-5" : ""}`}
                 >
-                  <Image src={item.cover.src} alt={getCaseImageAlt(item.cover, loc)} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover transition duration-500 ease-out group-hover:scale-[1.015]" />
+                  <ViewTransition name={`case-cover-${item.slug}`} share="case-image">
+                    <Image src={item.cover.src} alt={getCaseImageAlt(item.cover, loc)} fill sizes="(max-width: 1024px) 100vw, 66vw" className="case-cover-image object-cover group-hover:scale-[1.015]" />
+                  </ViewTransition>
                 </Link>
                 <div className={`border-t border-line pt-6 lg:col-span-4 ${index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}`}>
                   <div className="flex items-center justify-between gap-4">
@@ -60,10 +64,10 @@ export default async function PortfolioPage({ params }: Props) {
             ))}
           </div>
         ) : (
-          <div className="grid min-h-[30rem] gap-12 border-y border-line py-12 lg:grid-cols-12 lg:items-end lg:py-16">
+          <div className="grid min-h-[30rem] gap-12 border-y border-line py-12 lg:grid-cols-12 lg:items-end lg:py-16" data-reveal="rise">
             <div className="lg:col-span-7">
               <p className="eyebrow">{t("emptyLabel")}</p>
-              <h2 className="section-title mt-8">{t("emptyTitle")}</h2>
+              <h2 className="section-title mt-8" data-reveal="words"><AnimatedText text={t("emptyTitle")} mode="words" /></h2>
             </div>
             <div className="lg:col-span-4 lg:col-start-9">
               <p className="leading-relaxed text-fg-muted">{t("emptyText")}</p>

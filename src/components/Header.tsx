@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { type CSSProperties, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
@@ -12,16 +12,19 @@ type NavigationItem =
   | { href: "/portfolio" | "/servicos" | "/precos" | "/sobre"; label: string; native?: false }
   | { href: string; label: string; native: true };
 
+type MenuState = "closed" | "open" | "closing";
+
 export function Header() {
   const t = useTranslations("nav");
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const params = useParams<{ slug?: string | string[] }>();
   const router = useRouter();
-  const [open, setOpen] = useState(false);
+  const [menuState, setMenuState] = useState<MenuState>("closed");
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
   const other: Locale = locale === "pt" ? "en" : "pt";
+  const open = menuState === "open";
 
   const links: NavigationItem[] = [
     { href: "/portfolio", label: t("work") },
@@ -32,7 +35,7 @@ export function Header() {
   ];
 
   function switchLocale() {
-    setOpen(false);
+    closeMenu();
     const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
     if (pathname === "/servicos/[slug]") {
       if (slug) router.replace({ pathname: "/servicos/[slug]", params: { slug } }, { locale: other });
@@ -46,12 +49,14 @@ export function Header() {
   }
 
   function openMenu() {
-    setOpen(true);
+    setMenuState("open");
     requestAnimationFrame(() => firstMobileLinkRef.current?.focus());
   }
 
   function closeMenu(restoreFocus = false) {
-    setOpen(false);
+    if (menuState === "closed") return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setMenuState(reducedMotion ? "closed" : "closing");
     if (restoreFocus) requestAnimationFrame(() => menuButtonRef.current?.focus());
   }
 
@@ -59,7 +64,7 @@ export function Header() {
     <header
       className="sticky top-0 z-50 border-b border-line bg-bg"
       onKeyDown={(event) => {
-        if (event.key === "Escape" && open) closeMenu(true);
+        if (event.key === "Escape" && menuState === "open") closeMenu(true);
       }}
     >
       <div className="mx-auto flex h-[4.5rem] max-w-[var(--container)] items-center justify-between gap-5 px-5 sm:px-8">
@@ -70,7 +75,7 @@ export function Header() {
         <nav className="hidden h-full items-center gap-8 lg:flex" aria-label={t("mainNavigation")}>
           {links.map((item) => {
             const active = !item.native && pathname === item.href;
-            const className = `relative flex h-full items-center text-[0.82rem] font-semibold text-fg transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-brand after:transition-transform hover:text-brand ${
+            const className = `site-nav-link relative flex h-full items-center text-[0.82rem] font-semibold text-fg after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:bg-brand hover:text-brand ${
               active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100"
             }`;
 
@@ -109,16 +114,30 @@ export function Header() {
           aria-expanded={open}
           aria-controls="mobile-navigation"
           onClick={() => (open ? closeMenu() : openMenu())}
+          data-menu-open={open}
         >
-          <Icon name={open ? "close" : "menu"} size={22} />
+          <span className="menu-toggle-icon"><Icon name={open ? "close" : "menu"} size={22} /></span>
         </button>
       </div>
 
-      {open ? (
-        <nav id="mobile-navigation" className="border-t border-line bg-bg px-5 py-4 lg:hidden" aria-label={t("mobileNavigation")}>
+      {menuState !== "closed" ? (
+        <nav
+          id="mobile-navigation"
+          className="mobile-menu-panel border-t border-line bg-bg px-5 py-4 lg:hidden"
+          aria-label={t("mobileNavigation")}
+          aria-hidden={!open}
+          inert={!open}
+          data-state={menuState}
+          onAnimationEnd={(event) => {
+            if (event.target === event.currentTarget && menuState === "closing") {
+              setMenuState("closed");
+            }
+          }}
+        >
           <div className="mx-auto flex max-w-[var(--container)] flex-col">
             {links.map((item, index) => {
-              const shared = "flex min-h-14 items-center justify-between border-b border-line text-lg font-semibold text-fg";
+              const shared = "mobile-menu-item flex min-h-14 items-center justify-between border-b border-line text-lg font-semibold text-fg";
+              const itemStyle = { "--menu-index": index } as CSSProperties;
               return item.native ? (
                 <a
                   key={item.href}
@@ -126,6 +145,7 @@ export function Header() {
                   href={item.href}
                   onClick={() => closeMenu()}
                   className={shared}
+                  style={itemStyle}
                 >
                   {item.label}
                   <Icon name="arrow" size={17} className="text-brand" />
@@ -137,13 +157,14 @@ export function Header() {
                   href={item.href}
                   onClick={() => closeMenu()}
                   className={shared}
+                  style={itemStyle}
                 >
                   {item.label}
                   <Icon name="arrow" size={17} className="text-brand" />
                 </Link>
               );
             })}
-            <div className="mt-5 grid grid-cols-[auto_1fr] gap-3">
+            <div className="mobile-menu-item mt-5 grid grid-cols-[auto_1fr] gap-3" style={{ "--menu-index": links.length } as CSSProperties}>
               <button
                 type="button"
                 onClick={switchLocale}

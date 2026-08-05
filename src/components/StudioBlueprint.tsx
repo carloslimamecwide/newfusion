@@ -7,7 +7,7 @@ export function StudioBlueprint({ locale }: { locale: Locale }) {
     : ["Strategy", "Design", "Engineering", "Launch"];
 
   return (
-    <div className="studio-blueprint p-5 sm:p-7" role="img" aria-label={locale === "pt" ? "Poster técnico do processo WebFusionLab" : "Technical poster of the WebFusionLab process"}>
+    <div className="studio-blueprint p-5 sm:p-7" role="img" aria-label={locale === "pt" ? "Poster técnico do processo WebFusionLab" : "Technical poster of the WebFusionLab process"} data-reveal="media">
       <div className="relative z-10 flex items-start justify-between text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-navy" aria-hidden="true">
         <span>WebFusionLab<br /><span className="text-brand">Design &amp; Engineering</span></span>
         <span>01<br />Studio</span>

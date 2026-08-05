@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Section } from "@/components/Section";
+import { AnimatedText } from "@/components/AnimatedText";
 import { ContactForm } from "@/components/ContactForm";
 import { Icon } from "@/components/Icon";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
@@ -33,15 +34,17 @@ export default async function ContactPage({ params }: Props) {
     <Section className="border-b border-line pb-20 pt-14 sm:pb-28 sm:pt-20">
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-4">
-          <p className="eyebrow">{t("eyebrow")}</p>
-          <h1 className="contact-title mt-9">{t("title")}</h1>
-          <p className="body-copy mt-8">{t("subtitle")}</p>
+          <p className="eyebrow hero-sequence-item hero-sequence-eyebrow">{t("eyebrow")}</p>
+          <h1 className="contact-title mt-9" data-reveal="words">
+            <AnimatedText text={t("title")} mode="words" />
+          </h1>
+          <p className="body-copy hero-sequence-item hero-sequence-copy mt-8">{t("subtitle")}</p>
         </div>
 
         <div className="lg:col-span-8">
           <ContactForm />
 
-          <aside className="mt-12 grid gap-7 border-t border-line pt-7 sm:grid-cols-[1fr_auto] sm:items-start">
+          <aside className="mt-12 grid gap-7 border-t border-line pt-7 sm:grid-cols-[1fr_auto] sm:items-start" data-reveal="rise">
             <div>
               <h2 className="text-sm font-semibold text-brand">{t("alternatives")}</h2>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-8">

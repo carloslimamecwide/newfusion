@@ -2,7 +2,7 @@ import { Icon, type IconName } from "@/components/Icon";
 
 export function ServiceVisual({ icon, title, label }: { icon: IconName; title: string; label: string }) {
   return (
-    <div className="relative min-h-[24rem] overflow-hidden border border-line bg-surface sm:min-h-[32rem]" role="img" aria-label={label}>
+    <div className="relative min-h-[24rem] overflow-hidden border border-line bg-surface sm:min-h-[32rem]" role="img" aria-label={label} data-reveal="media">
       <div className="absolute inset-0 grid grid-cols-6 grid-rows-4" aria-hidden="true">
         {Array.from({ length: 24 }).map((_, index) => <span key={index} className="border-b border-r border-line/70" />)}
       </div>

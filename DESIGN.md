@@ -127,10 +127,15 @@ O poster técnico usa o símbolo real da marca, grelha e regras CSS/SVG. Não re
 
 ## Motion
 
-- Hero: opacity + translate de 12 px, 600–800 ms, entrada coordenada.
-- Links: underline/arrow de 180–220 ms.
-- Media: scale máximo de 1.015 e sombra discreta.
-- `prefers-reduced-motion` remove deslocação, scale e smooth scroll sem substituir por animações ultrarrápidas.
+- **Tokens:** 170 ms para feedback imediato, 260 ms para interação, 700–780 ms para entradas e `cubic-bezier(0.22, 1, 0.36, 1)` como easing principal.
+- **Hero:** o H1 é escrito letra a letra em passos de 20 ms, sem cursor em nenhuma fase e com a geometria final reservada desde o primeiro frame. O subtítulo continua a sequência em passos de 9 ms; ações e mockups entram antes dos dois segundos.
+- **Texto editorial:** títulos internos revelam palavras mascaradas em passos de 45 ms. O texto real permanece dentro de um único heading semântico, sem versões duplicadas para tecnologias de apoio.
+- **Scroll:** títulos, filas e media entram apenas uma vez quando 15% ficam visíveis. Os atrasos de listas avançam em passos de 55 ms e nunca ultrapassam 275 ms.
+- **Preview ao vivo:** cada dispositivo contém uma página vertical com três secções. A timeline sincronizada de 16 segundos alterna navegação, scroll suave e pausas legíveis entre Design, Engenharia e Contacto; no tablet e telemóvel, o contador e a posição de scroll acompanham a secção visível. A reprodução pausa fora do viewport, com a aba oculta ou durante hover, e retoma no mesmo ponto.
+- **Navegação:** o conteúdo principal usa crossfade sobreposto de 150 ms na saída e 280 ms na entrada. Header e footer permanecem como âncoras estáveis.
+- **Links:** underline/arrow de 180–220 ms. Media usa scale máximo de 1.015 e sombra discreta.
+- A experiência não depende de motion. Sem JavaScript ou suporte às APIs modernas, o conteúdo permanece visível e as mudanças são instantâneas.
+- `prefers-reduced-motion` mostra imediatamente todo o texto, fixa os dispositivos na primeira secção e remove máscaras, deslocação, scale, smooth scroll e View Transitions. A animação tipográfica nunca apresenta cursor.
 
 ## Responsive Rules
 

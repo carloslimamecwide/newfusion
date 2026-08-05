@@ -16,14 +16,14 @@ export async function Footer({ locale }: { locale: Locale }) {
     <footer className="border-t border-line bg-bg">
       <div className="mx-auto max-w-[var(--container)] px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4" data-reveal="rise">
             <Link href="/" aria-label={nav("homeLabel")} className="inline-flex min-h-12 items-center">
               <Brand />
             </Link>
             <p className="mt-6 max-w-xs leading-relaxed text-fg-muted">{t("tagline")}</p>
           </div>
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:col-span-4 lg:col-start-6">
+          <div className="grid gap-10 sm:grid-cols-2 lg:col-span-4 lg:col-start-6" data-reveal="rise" data-reveal-index="1">
             <div>
               <h2 className="text-xs font-semibold text-fg-subtle">{t("explore")}</h2>
               <ul className="mt-2">
@@ -45,7 +45,7 @@ export async function Footer({ locale }: { locale: Locale }) {
             </div>
           </div>
 
-          <div className="lg:col-span-2 lg:col-start-11 lg:text-right">
+          <div className="lg:col-span-2 lg:col-start-11 lg:text-right" data-reveal="rise" data-reveal-index="2">
             <a href={`/${other}`} className="editorial-link uppercase">
               {other}
               <Icon name="arrow" size={16} />
@@ -54,7 +54,7 @@ export async function Footer({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between" data-reveal="rise">
           <p>© {year} WebFusionLab. {t("rights")}</p>
           <p>Design &amp; Engineering</p>
         </div>
