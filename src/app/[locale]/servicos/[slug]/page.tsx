@@ -8,7 +8,7 @@ import { ServiceVisual } from "@/components/ServiceVisual";
 import { CallToAction } from "@/components/CallToAction";
 import { Icon } from "@/components/Icon";
 import { AnimatedText } from "@/components/AnimatedText";
-import { getLocalizedAlternates } from "@/lib/metadata";
+import { getLocalizedAlternates, getLocalizedSocialMetadata } from "@/lib/metadata";
 import type { Locale } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -26,7 +26,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: service[loc].seoTitle,
     description: service[loc].seoDescription,
     alternates: getLocalizedAlternates(loc, { pt: `/servicos/${slug}`, en: `/services/${slug}` }),
-    openGraph: { title: service[loc].seoTitle, description: service[loc].seoDescription },
+    ...getLocalizedSocialMetadata(
+      loc,
+      service[loc].seoTitle,
+      service[loc].seoDescription,
+      loc === "pt" ? `/servicos/${slug}` : `/services/${slug}`,
+    ),
   };
 }
 
@@ -53,7 +58,7 @@ export default async function ServiceDetailPage({ params }: Props) {
       </Section>
 
       <Section className="border-b border-line py-8 sm:py-12">
-        <ServiceVisual icon={service.icon} title={service[loc].title} label={service[loc].imageAlt} />
+        <ServiceVisual icon={service.icon} title={service[loc].title} label={service[loc].imageAlt} image={service.image} />
       </Section>
 
       <Section className="border-b border-line">

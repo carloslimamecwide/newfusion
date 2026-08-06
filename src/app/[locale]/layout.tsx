@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
-import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { routing, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,15 +10,9 @@ import { MotionObserver } from "@/components/MotionObserver";
 import { PageTransition } from "@/components/PageTransition";
 import { getSiteUrl } from "@/lib/site";
 
-const bricolage = Bricolage_Grotesque({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
-
-const sourceSans = Source_Sans_3({
-  subsets: ["latin"],
-  variable: "--font-source-sans",
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -29,7 +23,7 @@ type Props = {
 
 export const viewport: Viewport = {
   colorScheme: "light",
-  themeColor: "#ffffff",
+  themeColor: "#f8f7f4",
 };
 
 export function generateStaticParams() {
@@ -100,7 +94,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       data-scroll-behavior="smooth"
-      className={`${bricolage.variable} ${sourceSans.variable} h-full`}
+      className={`${manrope.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-bg font-body text-fg antialiased">
         <script

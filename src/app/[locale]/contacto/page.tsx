@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { Icon } from "@/components/Icon";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
 import { getCalendlyUrl } from "@/lib/site";
-import { getLocalizedAlternates } from "@/lib/metadata";
+import { getLocalizedAlternates, getLocalizedSocialMetadata } from "@/lib/metadata";
 import type { Locale } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("title"),
     description: t("subtitle"),
     alternates: getLocalizedAlternates(loc, { pt: "/contacto", en: "/contact" }),
-    openGraph: { title: t("title"), description: t("subtitle") },
+    ...getLocalizedSocialMetadata(loc, t("title"), t("subtitle"), loc === "pt" ? "/contacto" : "/contact"),
   };
 }
 
@@ -44,7 +44,25 @@ export default async function ContactPage({ params }: Props) {
         <div className="lg:col-span-8">
           <ContactForm />
 
-          <aside className="mt-12 grid gap-7 border-t border-line pt-7 sm:grid-cols-[1fr_auto] sm:items-start" data-reveal="rise">
+          <section id="faq" className="mt-24 scroll-mt-24 border-t border-line pt-16">
+            <p className="eyebrow" data-reveal="fade">{t("faqEyebrow")}</p>
+            <h2 className="section-title mt-7" data-reveal="words">
+              <AnimatedText text={t("faqTitle")} mode="words" />
+            </h2>
+            <div className="mt-12 border-y border-line">
+              {([1, 2, 3, 4] as const).map((item, index) => (
+                <details key={item} name="contact-faq" className="faq-item border-b border-line last:border-b-0" data-reveal="rise" data-reveal-index={index}>
+                  <summary className="flex min-h-20 cursor-pointer items-center justify-between gap-6 py-5 text-lg font-medium tracking-[-0.025em] text-ink sm:text-xl">
+                    {t(`faq${item}Question`)}
+                    <span className="faq-toggle text-2xl font-light" aria-hidden="true">+</span>
+                  </summary>
+                  <p className="max-w-3xl pb-8 leading-relaxed text-fg-muted">{t(`faq${item}Answer`)}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <aside className="mt-16 grid gap-7 border-t border-line pt-7 sm:grid-cols-[1fr_auto] sm:items-start" data-reveal="rise">
             <div>
               <h2 className="text-sm font-semibold text-brand">{t("alternatives")}</h2>
               <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-8">

@@ -5,17 +5,17 @@ import { AnimatedText } from "@/components/AnimatedText";
 
 export function CallToAction({ title, text, button }: { title: string; text: string; button: string }) {
   return (
-    <Section className="bg-brand text-white">
-      <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+    <Section className="bg-ink text-paper">
+      <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
         <div className="lg:col-span-7">
-          <h2 className="section-title !text-white" data-reveal="words">
-            <AnimatedText text={title} mode="words" />
-          </h2>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-white" data-reveal="rise" data-reveal-index="1">{text}</p>
+          <h2 className="section-title text-paper" data-reveal="words"><AnimatedText text={title} mode="words" /></h2>
         </div>
-        <Link href="/contacto" className="button-inverse lg:col-span-3 lg:col-start-10" data-reveal="rise" data-reveal-index="2">
-          {button}<Icon name="arrow" size={18} />
-        </Link>
+        <div className="lg:col-span-4 lg:col-start-9">
+          <p className="max-w-xl text-lg leading-relaxed text-paper/70" data-reveal="rise" data-reveal-index="1">{text}</p>
+          <Link href="/contacto" className="button-inverse mt-8" data-reveal="rise" data-reveal-index="2">
+            {button}<Icon name="arrow" size={18} />
+          </Link>
+        </div>
       </div>
     </Section>
   );

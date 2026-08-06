@@ -23,6 +23,10 @@ export function MotionObserver() {
       return;
     }
 
+    elements.forEach((element) => {
+      element.dataset.revealState = "pending";
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -38,6 +42,7 @@ export function MotionObserver() {
       },
     );
 
+    let revealFrame = 0;
     const frame = window.requestAnimationFrame(() => {
       const revealEdge = window.innerHeight * 0.92;
       const positions = elements.map((element) => ({
@@ -47,17 +52,18 @@ export function MotionObserver() {
 
       positions.forEach(({ element, top }) => {
         if (top < revealEdge) {
-          element.dataset.revealState = "visible";
+          revealFrame = window.requestAnimationFrame(() => {
+            element.dataset.revealState = "visible";
+          });
           return;
         }
-
-        element.dataset.revealState = "pending";
         observer.observe(element);
       });
     });
 
     return () => {
       window.cancelAnimationFrame(frame);
+      window.cancelAnimationFrame(revealFrame);
       observer.disconnect();
     };
   }, [pathname]);

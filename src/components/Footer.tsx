@@ -1,8 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Brand } from "@/components/Brand";
+import { Wordmark } from "@/components/Wordmark";
 import { Icon } from "@/components/Icon";
-import { getWhatsAppUrl } from "@/lib/whatsapp";
 import type { Locale } from "@/i18n/routing";
 
 export async function Footer({ locale }: { locale: Locale }) {
@@ -10,53 +9,17 @@ export async function Footer({ locale }: { locale: Locale }) {
   const nav = await getTranslations("nav");
   const year = new Date().getFullYear();
   const other: Locale = locale === "pt" ? "en" : "pt";
-  const whatsAppUrl = getWhatsAppUrl();
 
   return (
-    <footer className="border-t border-line bg-bg">
-      <div className="mx-auto max-w-[var(--container)] px-5 py-14 sm:px-8 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4" data-reveal="rise">
-            <Link href="/" aria-label={nav("homeLabel")} className="inline-flex min-h-12 items-center">
-              <Brand />
-            </Link>
-            <p className="mt-6 max-w-xs leading-relaxed text-fg-muted">{t("tagline")}</p>
-          </div>
-
-          <div className="grid gap-10 sm:grid-cols-2 lg:col-span-4 lg:col-start-6" data-reveal="rise" data-reveal-index="1">
-            <div>
-              <h2 className="text-xs font-semibold text-fg-subtle">{t("explore")}</h2>
-              <ul className="mt-2">
-                <li><Link href="/portfolio" className="inline-flex min-h-12 items-center text-sm text-fg hover:text-brand">{nav("work")}</Link></li>
-                <li><Link href="/servicos" className="inline-flex min-h-12 items-center text-sm text-fg hover:text-brand">{nav("services")}</Link></li>
-                <li><Link href="/precos" className="inline-flex min-h-12 items-center text-sm text-fg hover:text-brand">{nav("pricing")}</Link></li>
-                <li><Link href="/sobre" className="inline-flex min-h-12 items-center text-sm text-fg hover:text-brand">{nav("studio")}</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-xs font-semibold text-fg-subtle">{t("start")}</h2>
-              <ul className="mt-2">
-                <li><Link href="/contacto" className="inline-flex min-h-12 items-center text-sm text-fg hover:text-brand">{nav("cta")}</Link></li>
-                <li><a href={`/${locale}#processo`} className="inline-flex min-h-12 items-center text-sm text-fg hover:text-brand">{nav("process")}</a></li>
-                {whatsAppUrl ? (
-                  <li><a href={whatsAppUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center text-sm text-fg hover:text-brand">WhatsApp</a></li>
-                ) : null}
-              </ul>
-            </div>
-          </div>
-
-          <div className="lg:col-span-2 lg:col-start-11 lg:text-right" data-reveal="rise" data-reveal-index="2">
-            <a href={`/${other}`} className="editorial-link uppercase">
-              {other}
-              <Icon name="arrow" size={16} />
-            </a>
-            <p className="mt-16 text-sm leading-relaxed text-fg-muted">{t("location")}</p>
-          </div>
-        </div>
-
-        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-6 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between" data-reveal="rise">
-          <p>© {year} WebFusionLab. {t("rights")}</p>
-          <p>Design &amp; Engineering</p>
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <Link href="/" aria-label={nav("homeLabel")} className="site-logo"><Wordmark /></Link>
+        <p>© {year} WebFusionLab. {t("rights")}</p>
+        <div className="footer-links">
+          <Link href="/servicos">{nav("services")}</Link>
+          <Link href="/precos">{nav("pricing")}</Link>
+          <a href={`/${other}`} lang={other}>{other.toUpperCase()}</a>
+          <a href="#main-content" className="back-to-top" aria-label={t("backToTop")}><Icon name="arrow" size={15} /></a>
         </div>
       </div>
     </footer>

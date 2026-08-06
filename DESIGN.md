@@ -1,152 +1,151 @@
 ---
 name: WebFusionLab
-description: Light editorial design system for a boutique digital studio
+description: Monochrome kinetic identity for a boutique digital studio
 colors:
-  signal-blue: "oklch(0.57616 0.21505 260.45)"
-  action-blue-aa: "oklch(0.50529 0.18553 259.78)"
-  signal-blue-strong: "oklch(0.54 0.22 255)"
-  brand-navy: "oklch(0.26 0.12 280)"
-  paper-white: "oklch(1 0 0)"
-  cool-band: "oklch(0.975 0.010 255)"
-  quiet-surface: "oklch(0.990 0.004 255)"
-  primary-ink: "oklch(0.22 0.055 275)"
-  body-ink: "oklch(0.43 0.040 270)"
-  quiet-ink: "oklch(0.55 0.025 265)"
-  hairline: "oklch(0.885 0.018 255)"
-  success: "oklch(0.52 0.15 155)"
-  danger: "oklch(0.55 0.20 25)"
+  paper: "oklch(0.985 0.004 85)"
+  paper-soft: "oklch(0.962 0.004 85)"
+  ink: "oklch(0.145 0.006 255)"
+  ink-soft: "oklch(0.245 0.006 255)"
+  graphite: "oklch(0.48 0.006 255)"
+  line: "oklch(0.865 0.005 255)"
+  line-dark: "oklch(0.28 0.006 255)"
 typography:
-  display:
-    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "clamp(3.6rem, 8vw, 7.4rem)"
-    fontWeight: 650
-    lineHeight: 0.9
-    letterSpacing: "-0.06em"
-  headline:
-    fontFamily: "Bricolage Grotesque, system-ui, sans-serif"
-    fontSize: "clamp(2.6rem, 5vw, 5rem)"
-    fontWeight: 620
-    lineHeight: 0.94
-    letterSpacing: "-0.05em"
-  body:
-    fontFamily: "Source Sans 3, system-ui, sans-serif"
-    fontSize: "clamp(1.05rem, 1.4vw, 1.22rem)"
-    fontWeight: 400
-    lineHeight: 1.6
-  label:
-    fontFamily: "Source Sans 3, system-ui, sans-serif"
-    fontSize: "0.78rem"
-    fontWeight: 650
-    lineHeight: 1.2
+  family: "Manrope, system-ui, sans-serif"
+  displaySize: "clamp(4rem, 6.1vw, 7.25rem)"
+  displayWeight: 400
+  displayLineHeight: 0.88
+  headlineSize: "clamp(2.5rem, 4.8vw, 5rem)"
+  bodySize: "clamp(1rem, 1.15vw, 1.125rem)"
 rounded:
-  sm: "2px"
-  md: "4px"
-  lg: "8px"
+  control: "999px"
+  media: "4px"
 spacing:
-  xs: "8px"
-  sm: "16px"
-  md: "24px"
-  lg: "48px"
-  section: "clamp(5.5rem, 10vw, 9.5rem)"
+  gutter: "clamp(1.25rem, 4vw, 4.5rem)"
+  section: "clamp(5.5rem, 9.5vw, 9rem)"
 ---
 
 # Design System: WebFusionLab
 
-## Creative North Star: “The Working Proof”
+## Creative North Star: “The Living Object”
 
-O site parece um caderno de projeto transformado numa presença comercial: papel branco verdadeiro, grelha rigorosa, tipografia navy, traço azul e interfaces tratadas como objetos de trabalho. A referência editorial é traduzida para um estúdio digital sem copiar componentes, conteúdo ou marcas.
+A página parece um estúdio impresso que ganhou movimento. A grelha e a tipografia são muito silenciosas; a escultura 3D, as imagens monocromáticas e os contrastes de secção dão-lhe presença. A referência visual é seguida na composição e no ritmo, adaptando a linguagem e o conteúdo à WebFusionLab sem copiar nomes, pessoas ou projetos.
 
-O sistema é claro e plano. A profundidade aparece apenas nos dispositivos e screenshots; o resto vive de escala, alinhamento, linhas e espaço negativo.
+Três palavras físicas orientam decisões: **precisa, escultural, silenciosa**.
 
 ## Foundations
 
-- **Canvas:** branco verdadeiro, sem bege, creme ou tonalidade quente.
-- **Bands:** azul-cinza muito claro para prova, preços, FAQ e transições de ritmo.
-- **Grid:** 12 colunas, contentor máximo de 1360 px, gutters de 20 px em mobile e 32 px a partir de tablet.
-- **Measure:** corpo limitado a 70ch; títulos limitados por caráter, não por caixas artificiais.
-- **Corners:** 2–8 px. Círculos apenas para ícones ou marcadores que o conceito exija.
-- **Lines:** regras de 1 px organizam filas, tabelas, formulários e rodapés.
+- **Canvas:** branco neutro ligeiramente quente (`paper`), nunca branco puro clínico.
+- **Contrast bands:** preto suave (`ink`) com texto `paper` para serviços e processo.
+- **Grid:** 12 colunas, largura útil máxima de 1480 px, gutters fluidos.
+- **Rhythm:** cada secção tem uma ideia dominante; grandes intervalos separam capítulos.
+- **Lines:** 1 px, cinza frio e baixa opacidade. A estrutura é desenhada com regras e alinhamentos.
+- **Corners:** 0–4 px em imagens e superfícies; pills apenas em ações e marcadores circulares.
+- **Shadows:** reservadas à escultura e à fotografia do CTA; nunca em contentores de texto.
 
 ## Color
 
-- **Signal Blue** (`oklch(0.57616 0.21505 260.45)`, equivalente a `#1e6ff5`): foco e acentos gráficos.
-- **Action Blue AA** (`oklch(0.50529 0.18553 259.78)`): CTAs, links, números e marcadores; mantém contraste AA também sobre as bandas azul-cinza.
-- **Signal Blue Strong** (`oklch(0.54 0.22 255)`): hover e active.
-- **Brand Navy** (`oklch(0.26 0.12 280)`): títulos, logótipo e texto de maior contraste.
-- **Paper White** (`oklch(1 0 0)`): fundo principal e controlos.
-- **Cool Band** (`oklch(0.975 0.010 255)`): secções alternadas.
-- **Primary Ink** (`oklch(0.22 0.055 275)`): texto principal.
-- **Body Ink** (`oklch(0.43 0.040 270)`): parágrafos.
-- **Hairline** (`oklch(0.885 0.018 255)`): fronteiras.
+- **Paper:** `oklch(0.985 0.004 85)` para fundo principal.
+- **Paper soft:** `oklch(0.962 0.004 85)` para transições e estúdio.
+- **Ink:** `oklch(0.145 0.006 255)` para texto, botões e bandas.
+- **Ink soft:** `oklch(0.245 0.006 255)` para hover e superfícies escuras secundárias.
+- **Graphite:** `oklch(0.48 0.006 255)` para texto de suporte.
+- **Lines:** `oklch(0.865 0.005 255)` em claro e `oklch(0.28 0.006 255)` em escuro.
 
-O azul deve ocupar menos de 12% de um ecrã normal, exceto no CTA final de largura completa.
+Não existem cores de destaque decorativas. Estado, foco e erro usam contraste, contorno e texto; o erro mantém uma tonalidade funcional discreta apenas onde é necessário.
 
 ## Typography
 
-- **Display:** Bricolage Grotesque 650, `clamp(3.6rem, 8vw, 7.4rem)`, line-height 0.9.
-- **Page title:** Bricolage Grotesque 650, `clamp(3.2rem, 7vw, 6.5rem)`, line-height 0.92.
-- **Section title:** Bricolage Grotesque 620, `clamp(2.6rem, 5vw, 5rem)`, line-height 0.94.
-- **Row title:** Bricolage Grotesque 600, 1.5–2.5rem.
-- **Body:** Source Sans 3, 1.05–1.22rem, line-height 1.6.
-- **Labels:** Source Sans 3 650, 0.78rem. Usar sentence case; maiúsculas apenas em metadados muito curtos.
+Manrope é a única família, carregada por `next/font`. A voz nasce da diferença entre escala, peso e espaço, não de múltiplas famílias.
 
-Cada viewport recebe uma frase dominante. Eyebrows aparecem nas aberturas de secções, nunca por cima do H1 do hero.
+- **Hero:** 400, `clamp(4rem, 6.1vw, 7.25rem)`, line-height 0.88, tracking `-0.065em`, lowercase.
+- **Page title:** 400, `clamp(3.4rem, 6vw, 6.8rem)`, line-height 0.9.
+- **Section title:** 400, `clamp(2.5rem, 4.8vw, 5rem)`, line-height 0.94.
+- **Row title:** 450–550, 1.1–1.35rem.
+- **Body:** 400, `clamp(1rem, 1.15vw, 1.125rem)`, line-height 1.65, máximo 68ch.
+- **Labels:** 600, 0.68–0.75rem, maiúsculas e tracking moderado apenas em metadados curtos.
 
-## Components
+## Navigation
 
-### Navigation
+Header sticky sobre `paper`, 76 px em desktop e 68 px em mobile. O wordmark é empilhado em três linhas. A navegação fica visualmente centrada e o CTA preto em pill fecha a grelha. O seletor PT/EN permanece explícito.
 
-Header branco sólido de 72 px, sticky, com hairline inferior. Desktop mostra logótipo real, cinco ligações, idioma e CTA. Mobile abre um painel inline branco, preserva a ordem do DOM, fecha após navegação e expõe `aria-expanded`/`aria-controls`.
+No mobile, um botão de 48 px abre um painel monocromático. O painel preserva a ordem de tabulação, fecha com `Escape`, devolve foco ao trigger, usa `aria-expanded` e torna o fundo `inert` enquanto está aberto.
 
-### Buttons and links
+## Buttons and Links
 
-- Primário: azul, texto branco, canto de 2 px e altura mínima de 48 px.
-- Secundário: link navy/azul sublinhado por uma regra curta; sem caixa quando o conceito usa ação editorial.
-- Ações em banda azul: fundo branco e texto navy.
-- Hover move seta ou underline; nunca acrescenta glow.
+- **Primary:** pill preta, texto `paper`, mínimo 48 px, seta dentro de um círculo subtil.
+- **Inverse:** pill `paper` numa banda preta, texto `ink`.
+- **Text link:** sem caixa, pequena seta ou ponto que se desloca no hover.
+- Feedback dura 160–220 ms e move no máximo 2 px.
 
-### Section headings
+## Homepage
 
-Eyebrow azul com uma regra curta por baixo, título navy e texto de suporte limitado. A composição pode ocupar 5–7 colunas e deixa o restante espaço respirar.
+### Hero
 
-### Rows and tables
+Ocupa quase um viewport. O texto vive nas colunas 2–6 e a escultura nas 6–12. O H1 quebra em três linhas; a última termina em underscore. Um marcador vertical de scroll fixa o eixo esquerdo. O círculo orbital e a assinatura circular são linhas de interface, nunca controlos.
 
-Serviços, preços, FAQ e conteúdo estruturado usam filas abertas entre regras. Evitar cartões. Números tabulares e setas finas reforçam a leitura horizontal.
+### Services
 
-### Media and mockups
+Banda preta com introdução à esquerda e quatro disciplinas numa grelha aberta. Cada disciplina tem ícone real do sistema, número, título e texto breve; não existem cartões.
 
-Screenshots reais são o material visual principal. Dispositivos usam fundo neutro e uma sombra ampla, discreta e fria. Só a imagem LCP recebe prioridade. Quando não há casos autorizados, usa-se uma composição neutra da própria WebFusionLab claramente tratada como demonstração, sem clientes ou métricas fictícias.
+### Capabilities
 
-### Forms
+Galeria horizontal com scroll-snap. Quatro imagens editoriais verticais, monocromáticas, com legenda sobreposta. Representam capacidades e não trabalho concluído. Botões anterior/seguinte são acessíveis e o scroll nativo continua disponível.
 
-Labels visíveis, campos de linha ou superfícies brancas, 48 px mínimos, radios sempre visíveis para grupos com até cinco opções. Erros combinam cor, texto e `aria-describedby`; o estado global usa `aria-live`. Não adicionar consentimento decorativo.
+### Studio
 
-### Studio blueprint
+Fundo `paper-soft`, manifesto curto à esquerda e duas imagens conceptuais lado a lado. As legendas “Design & estratégia” e “Engenharia & produto” descrevem disciplinas, não pessoas.
 
-O poster técnico usa o símbolo real da marca, grelha e regras CSS/SVG. Não representa uma equipa ou escritório e não usa fotografia stock.
+### Process
+
+Banda preta com quatro passos ligados por regras e setas. Em mobile, a linha horizontal torna-se sequência vertical.
+
+### Final CTA
+
+Texto grande à esquerda, apoio no centro e fotografia horizontal de portátil sobre pedestal à direita. O botão principal repete “Vamos falar”.
+
+## Hero 3D
+
+- Three.js é importado dinamicamente dentro de um Client Component isolado.
+- A escultura representa um fluxo de dados: 68 linhas tubulares, ligações transversais e nós, fundidos numa única geometria.
+- Material branco mate, iluminação ampla e sombra de contacto; sem textura, brilho cromado ou cor.
+- Rotação lenta, flutuação máxima de 0.04 unidades, resposta amortecida ao cursor e progressão de scroll discreta.
+- A escala responde à largura do contentor entre 0.76 e 1, preservando espaço negativo entre a escultura e o título em ecrãs largos.
+- DPR limitado a 1.5 e reduzido em mobile; resize via `ResizeObserver`.
+- O render loop pausa fora do viewport e com a página oculta.
+- `saveData` e `prefers-reduced-motion` mostram imediatamente o WebP estático exportado da mesma direção artística.
+- Perda de contexto ou ausência de WebGL mostra um WebP local da mesma direção artística.
 
 ## Motion
 
-- **Tokens:** 170 ms para feedback imediato, 260 ms para interação, 700–780 ms para entradas e `cubic-bezier(0.22, 1, 0.36, 1)` como easing principal.
-- **Hero:** o H1 é escrito letra a letra em passos de 20 ms, sem cursor em nenhuma fase e com a geometria final reservada desde o primeiro frame. O subtítulo continua a sequência em passos de 9 ms; ações e mockups entram antes dos dois segundos.
-- **Texto editorial:** títulos internos revelam palavras mascaradas em passos de 45 ms. O texto real permanece dentro de um único heading semântico, sem versões duplicadas para tecnologias de apoio.
-- **Scroll:** títulos, filas e media entram apenas uma vez quando 15% ficam visíveis. Os atrasos de listas avançam em passos de 55 ms e nunca ultrapassam 275 ms.
-- **Preview ao vivo:** cada dispositivo contém uma página vertical com três secções. A timeline sincronizada de 16 segundos alterna navegação, scroll suave e pausas legíveis entre Design, Engenharia e Contacto; no tablet e telemóvel, o contador e a posição de scroll acompanham a secção visível. A reprodução pausa fora do viewport, com a aba oculta ou durante hover, e retoma no mesmo ponto.
-- **Navegação:** o conteúdo principal usa crossfade sobreposto de 150 ms na saída e 280 ms na entrada. Header e footer permanecem como âncoras estáveis.
-- **Links:** underline/arrow de 180–220 ms. Media usa scale máximo de 1.015 e sombra discreta.
-- A experiência não depende de motion. Sem JavaScript ou suporte às APIs modernas, o conteúdo permanece visível e as mudanças são instantâneas.
-- `prefers-reduced-motion` mostra imediatamente todo o texto, fixa os dispositivos na primeira secção e remove máscaras, deslocação, scale, smooth scroll e View Transitions. A animação tipográfica nunca apresenta cursor.
+- **Feedback:** 160 ms.
+- **Interaction:** 220 ms.
+- **Entrance:** 620–760 ms.
+- **Easing:** `cubic-bezier(0.16, 1, 0.3, 1)`.
+- Hero: eyebrow, linhas do título, parágrafo, ações e escultura entram numa única sequência de até 1.4 s.
+- O H1 revela linhas/palavras com máscara; não existe escrita letra a letra nem cursor.
+- As máscaras de linha reservam uma margem mínima de `0.36em` abaixo e `0.28em` nas laterais. As palavras animadas mantêm `overflow: visible` para nunca cortar descendentes ou o overhang de glifos.
+- Secções abaixo da dobra revelam título, regras e media uma vez através do `MotionObserver`.
+- Hover de imagem escala no máximo 1.018; setas avançam 3 px.
+- View Transition usa crossfade curto e deslocamento máximo de 6 px.
+- `prefers-reduced-motion: reduce` remove máscaras, scroll suave, rotação, escala e transições de página, mantendo tudo imediatamente visível.
+
+## Forms and FAQ
+
+Campos de 48 px, labels reais e radios visíveis. Foco usa contorno de 2 px com offset. Erros combinam texto e `aria-describedby`; o estado global usa `aria-live`. FAQ fica no Contacto e usa linhas abertas, não cards.
 
 ## Responsive Rules
 
-- **390 px:** tudo numa coluna; H1 entre 3.4–4.4rem; mockup simplificado; menu ocupa a largura; preços empilham sem perder relação entre nome e valor.
-- **768 px:** grelha de seis colunas equivalente; casos secundários podem formar duas colunas; formulário continua orientado à leitura.
-- **1440 px:** grelha completa de 12 colunas; hero mostra texto à esquerda e dispositivos sobrepostos à direita; a secção seguinte é visível no limite inferior.
+- **390 px:** header compacto, hero numa coluna com escultura atrás/abaixo sem tapar o texto, galeria com cartão de 82vw, bandas empilhadas e processo vertical.
+- **768 px:** grelha de seis colunas equivalente, escultura mantém presença mas não invade o H1, galeria mostra 2.2 cartões.
+- **1440 px:** grelha completa, hero quase full-screen com relação texto/escultura próxima da referência e uma faixa da secção seguinte visível.
+- A 200% de zoom, conteúdo reflow sem scroll horizontal; pills podem quebrar texto mas nunca cortar.
 
 ## Non-negotiables
 
-- Não usar glassmorphism, gradient text, fundos dark, stock genérico ou grelhas repetidas de cartões.
-- Não inventar clientes, marcas, testemunhos, prémios, screenshots ou métricas.
-- Não usar emoji como ícone.
-- Não adicionar bibliotecas visuais ou de animação.
-- Não publicar uma imagem como substituto de texto, navegação, controlos ou formulário.
+- Não inventar casos, clientes, equipa, testemunhos, prémios ou métricas.
+- Não usar gradientes de texto, glassmorphism, neon, raios excessivos ou grids de cards SaaS.
+- Não usar emojis, ASCII art, SVGs decorativos improvisados ou placeholders visuais.
+- Não usar imagens conceptuais como prova de trabalho.
+- Todos os visuais editoriais devem representar interfaces, dados, software, pagamentos ou infraestrutura digital; evitar cerâmica, mobiliário e objetos sem relação tecnológica.
+- Não depender de WebGL, motion, hover ou JavaScript para comunicar ou navegar.
+- Não alterar API, rotas, deployment ou pipeline.

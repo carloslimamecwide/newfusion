@@ -41,10 +41,9 @@ export const services: ServiceContent[] = [
   {
     slug: "sites-landing-pages",
     icon: "globe",
-    image:
-      "/images/services/sites.jpg",
+    image: "/images/editorial/capability-web-digital.webp",
     pt: {
-      imageAlt: "Interface responsiva de um website institucional",
+      imageAlt: "Ecrã com camadas transparentes de interfaces web conceptuais",
       title: "Sites e landing pages",
       short: "Presença online profissional que converte visitantes em contactos.",
       description:
@@ -72,7 +71,7 @@ export const services: ServiceContent[] = [
         "Sites e landing pages profissionais para PME e empresas. Rápidos, SEO-friendly e pensados para gerar contactos.",
     },
     en: {
-      imageAlt: "Responsive company website interface",
+      imageAlt: "Display with layered transparent conceptual web interfaces",
       title: "Websites & landing pages",
       short: "Professional online presence that turns visitors into leads.",
       description:
@@ -103,10 +102,9 @@ export const services: ServiceContent[] = [
   {
     slug: "web-applications",
     icon: "app",
-    image:
-      "/images/services/web-apps.jpg",
+    image: "/images/editorial/studio-engineering-digital.webp",
     pt: {
-      imageAlt: "Interface de uma aplicação web empresarial",
+      imageAlt: "Módulo de computação com circuitos e infraestrutura de dados",
       title: "Aplicações web",
       short: "Portais, dashboards e produtos web à medida do seu processo.",
       description:
@@ -134,7 +132,7 @@ export const services: ServiceContent[] = [
         "Aplicações web, dashboards e portais para PME e empresas. Software à medida com foco em usabilidade e escalabilidade.",
     },
     en: {
-      imageAlt: "Business web application interface",
+      imageAlt: "Compute module with circuits and data infrastructure",
       title: "Web applications",
       short: "Portals, dashboards, and custom web products for your process.",
       description:
@@ -165,10 +163,9 @@ export const services: ServiceContent[] = [
   {
     slug: "ecommerce",
     icon: "cart",
-    image:
-      "/images/services/ecommerce.jpg",
+    image: "/images/editorial/capability-commerce-digital.webp",
     pt: {
-      imageAlt: "Interface de catálogo de uma loja online",
+      imageAlt: "Terminal de pagamento e interface conceptual de checkout digital",
       title: "E-commerce",
       short: "Lojas online preparadas para vender com confiança.",
       description:
@@ -196,7 +193,7 @@ export const services: ServiceContent[] = [
         "E-commerce para PME e marcas. Lojas online com pagamentos, envios e gestão simples.",
     },
     en: {
-      imageAlt: "Online store catalogue interface",
+      imageAlt: "Payment terminal and conceptual digital checkout interface",
       title: "E-commerce",
       short: "Online stores built to sell with confidence.",
       description:
@@ -227,10 +224,9 @@ export const services: ServiceContent[] = [
   {
     slug: "mobile-apps",
     icon: "mobile",
-    image:
-      "/images/services/mobile.jpg",
+    image: "/images/editorial/capability-product-digital.webp",
     pt: {
-      imageAlt: "Interface de uma aplicação mobile",
+      imageAlt: "Telemóvel e tablet com interfaces conceptuais de aplicações",
       title: "Apps mobile",
       short: "Experiências móveis para clientes e equipas em movimento.",
       description:
@@ -258,7 +254,7 @@ export const services: ServiceContent[] = [
         "Apps mobile para iOS e Android. UX clara, backends sólidos e foco no utilizador final.",
     },
     en: {
-      imageAlt: "Mobile application interface",
+      imageAlt: "Phone and tablet with conceptual application interfaces",
       title: "Mobile apps",
       short: "Mobile experiences for customers and teams on the move.",
       description:
@@ -289,10 +285,9 @@ export const services: ServiceContent[] = [
   {
     slug: "integrations-apis",
     icon: "link",
-    image:
-      "/images/services/apis.jpg",
+    image: "/images/editorial/capability-strategy-digital.webp",
     pt: {
-      imageAlt: "Diagrama de ligação entre sistemas digitais",
+      imageAlt: "Topologia conceptual de dados com fibras e nós interligados",
       title: "Integrações e APIs",
       short: "Sistemas a falar entre si: menos cópia manual, mais fiabilidade.",
       description:
@@ -320,7 +315,7 @@ export const services: ServiceContent[] = [
         "Integrações e APIs para empresas. Ligue ERP, CRM, pagamentos e automação de processos.",
     },
     en: {
-      imageAlt: "Diagram connecting digital systems",
+      imageAlt: "Conceptual data topology with interconnected fibres and nodes",
       title: "Integrations & APIs",
       short: "Systems that talk to each other: less copy-paste, more reliability.",
       description:
@@ -351,10 +346,9 @@ export const services: ServiceContent[] = [
   {
     slug: "maintenance-support",
     icon: "shield",
-    image:
-      "/images/services/maintenance.jpg",
+    image: "/images/editorial/studio-engineering-digital.webp",
     pt: {
-      imageAlt: "Interface de monitorização e suporte técnico",
+      imageAlt: "Módulo de computação com circuitos e infraestrutura de dados",
       title: "Manutenção e suporte",
       short: "O seu produto em produção com acompanhamento contínuo.",
       description:
@@ -382,7 +376,7 @@ export const services: ServiceContent[] = [
         "Manutenção contínua de sites e apps. Segurança, updates e suporte para o seu software em produção.",
     },
     en: {
-      imageAlt: "Technical monitoring and support interface",
+      imageAlt: "Compute module with circuits and data infrastructure",
       title: "Maintenance & support",
       short: "Your product in production with ongoing care.",
       description:
@@ -413,10 +407,9 @@ export const services: ServiceContent[] = [
   {
     slug: "consulting-ux",
     icon: "bulb",
-    image:
-      "/images/services/consulting.jpg",
+    image: "/images/editorial/studio-design-digital.webp",
     pt: {
-      imageAlt: "Sessão de estratégia e experiência de utilização",
+      imageAlt: "Mão utiliza uma caneta digital numa interface conceptual de produto",
       title: "Consultoria e UX",
       short: "Clareza antes de construir: menos desperdício, melhores decisões.",
       description:
@@ -444,7 +437,7 @@ export const services: ServiceContent[] = [
         "Consultoria UX e discovery para produtos digitais. Roadmaps claros e decisões técnicas fundamentadas.",
     },
     en: {
-      imageAlt: "Strategy and user experience session",
+      imageAlt: "Hand uses a digital stylus on a conceptual product interface",
       title: "Consulting & UX",
       short: "Clarity before you build: less waste, better decisions.",
       description:

@@ -11,7 +11,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={`scroll-mt-20 px-5 py-[var(--section-y)] sm:px-8 ${className}`}>
+    <section id={id} className={`scroll-mt-20 px-[var(--gutter)] py-[var(--section-y)] ${className}`}>
       <div className="mx-auto max-w-[var(--container)]">{children}</div>
     </section>
   );
@@ -34,7 +34,7 @@ export function SectionHeading({
         align === "center" ? "mx-auto text-center" : ""
       }`}
     >
-      {eyebrow && <p className="eyebrow mb-5" data-reveal="fade">{eyebrow}</p>}
+      {eyebrow && <p className="eyebrow mb-7" data-reveal="fade">{eyebrow}</p>}
       <h2 className="section-title" data-reveal="words" data-reveal-index={eyebrow ? "1" : undefined}>
         <AnimatedText text={title} mode="words" />
       </h2>

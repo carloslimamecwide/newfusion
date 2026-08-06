@@ -6,48 +6,58 @@ brand
 
 ## Audience
 
-Decisores de PME e marcas, em Portugal e noutros mercados, que estão a comparar parceiros digitais e precisam de reconhecer rapidamente três coisas: qualidade visual, capacidade técnica e clareza comercial. Procuram websites, lojas online ou produtos digitais que melhorem a perceção da empresa e transformem atenção em contactos ou vendas.
+Decisores de PME e marcas, em Portugal e noutros mercados, que procuram um parceiro para criar websites, lojas online e produtos digitais com maior qualidade visual, clareza comercial e robustez técnica.
 
 ## Product Purpose
 
-A WebFusionLab apresenta e vende os serviços de um estúdio boutique de design e desenvolvimento. O site deve demonstrar qualidade antes de a prometer, explicar o processo sem ruído e conduzir visitantes qualificados para um pedido de proposta. Sucesso significa receber pedidos com objetivo, orçamento e prazo compatíveis, sem recorrer a afirmações, clientes ou métricas inventadas.
+A WebFusionLab apresenta e vende os serviços de um estúdio boutique de design e desenvolvimento. O site deve provar critério através da própria experiência, explicar o trabalho sem ruído e transformar interesse em pedidos de proposta qualificados.
 
 ## Positioning
 
-**Design e engenharia digital, na mesma mesa.**
+**Experiências digitais desenhadas e construídas à medida.**
 
-A WebFusionLab é pequena por escolha: contacto direto, decisões rápidas e especialistas envolvidos apenas quando o projeto pede. A proposta junta direção visual, experiência de utilização e engenharia sólida para PME e marcas que querem vender com mais confiança.
+A WebFusionLab une estratégia, design e engenharia na mesma relação de trabalho. É pequena por escolha: existe contacto direto, as decisões são rápidas e cada disciplina entra quando acrescenta valor.
 
 ## Brand Personality
 
-Luz natural, papel branco, tinta navy e traço técnico azul. A voz é precisa, confiante e próxima. A marca deve parecer contemporânea, criteriosa e comercialmente clara, nunca fria, pretensiosa ou excessivamente técnica.
+Precisa, tátil, experimental e humana. A marca combina a disciplina de um estúdio contemporâneo com a curiosidade de um laboratório: papel neutro, tinta preta, imagens silenciosas e uma peça digital viva no hero.
+
+## Primary Offer
+
+- Websites e landing pages orientados a conversão.
+- Lojas online claras, rápidas e fáceis de operar.
+- Aplicações web e produtos digitais feitos à medida.
+- Estratégia, design de experiência, integrações e otimização como capacidades complementares.
+
+## Conversion Goal
+
+O percurso principal termina em “Vamos falar” e no formulário de contacto qualificado. O visitante deve perceber o tipo de trabalho, a forma de colaboração e a ordem de investimento antes de enviar o pedido.
 
 ## Content Rules
 
-- Mostrar trabalho real antes de usar adjetivos.
-- Publicar apenas casos autorizados, com screenshots e resultados verificáveis.
-- Tratar capacidades, processo e preços como informação, não como decoração.
-- Manter PT e EN equivalentes em significado, tom e detalhe.
-- Falar como um estúdio boutique: “nós” para a WebFusionLab, sem oscilar entre “eu” e “equipa”.
-- Qualificar o contacto com respeito, sem padrões manipuladores.
+- Falar sempre como estúdio — “nós” — sem simular dimensão ou equipa fixa.
+- Não inventar clientes, casos, testemunhos, prémios, resultados ou métricas.
+- Identificar imagens editoriais como representações conceptuais de capacidades.
+- Publicar portefólio apenas quando existirem projetos autorizados e factos verificáveis.
+- Manter PT e EN equivalentes em intenção, precisão e detalhe.
+- Tratar preços, processo e formulário como informação útil, não como decoração.
 
-## Anti-references
+## Homepage Narrative
 
-- Landing pages SaaS genéricas com grelhas repetidas de cartões.
-- Fundos dark, neon, brilhos, gradient text ou glassmorphism.
-- Editorial artificial com serifas de luxo e itálicos gratuitos.
-- Stock apresentado como equipa, escritório ou trabalho real.
-- Prémios, testemunhos, clientes e métricas não verificáveis.
-- Botões flutuantes que competem com o pedido de proposta.
-
-## Design Principles
-
-1. **Clareza primeiro:** uma mensagem dominante por viewport e suporte visivelmente mais calmo.
-2. **Arquitetura editorial:** grelha, escala, regras e espaço criam hierarquia; decoração não.
-3. **Azul como sinal:** o azul identifica ações, foco e orientação, não preenche o ecrã inteiro.
-4. **Proximidade premium:** o design deve parecer cuidado e a linguagem deve continuar humana.
-5. **Engenharia invisível:** performance, acessibilidade e robustez são sentidas no uso.
+1. **Hero:** a promessa e a personalidade visual da WebFusionLab.
+2. **Serviços:** quatro disciplinas apresentadas com clareza numa banda escura.
+3. **Capacidades:** imagens editoriais que mostram territórios criativos, nunca falsos projetos.
+4. **Estúdio:** design/estratégia e engenharia/produto como duas disciplinas complementares.
+5. **Processo:** quatro etapas simples, transparentes e acionáveis.
+6. **CTA:** convite direto para falar sobre o próximo projeto.
 
 ## Accessibility & Inclusion
 
-Cumprir WCAG 2.2 AA. Garantir navegação completa por teclado, skip link, foco visível, estrutura semântica, contraste suficiente, alvos táteis mínimos de 48 px, texto ampliável e mensagens de formulário anunciadas por tecnologias de apoio. A experiência não pode depender de animação, hover ou cor isolada e todo o movimento deve respeitar `prefers-reduced-motion`.
+Cumprir WCAG 2.2 AA. A navegação deve funcionar por teclado, com skip link, foco visível, estrutura semântica, alvos táteis mínimos de 48 px e estados de formulário anunciados. A experiência não depende de cor, hover, WebGL ou movimento; `prefers-reduced-motion` e `saveData` recebem uma versão estática completa.
+
+## Non-goals
+
+- Não parecer uma plataforma SaaS, um marketplace ou uma agência de grande escala.
+- Não usar o hero 3D como controlo, jogo ou distração permanente.
+- Não adicionar CMS, analytics, biblioteca de UI ou biblioteca de animação nesta fase.
+- Não alterar rotas, API de contacto, deployment, Docker ou workflow GitHub.

@@ -9,7 +9,7 @@ import { Section } from "@/components/Section";
 import { CallToAction } from "@/components/CallToAction";
 import { Icon } from "@/components/Icon";
 import { AnimatedText } from "@/components/AnimatedText";
-import { getLocalizedAlternates } from "@/lib/metadata";
+import { getLocalizedAlternates, getLocalizedSocialMetadata } from "@/lib/metadata";
 import type { Locale } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -27,11 +27,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: item[loc].title,
     description: item[loc].summary,
     alternates: getLocalizedAlternates(loc, { pt: `/portfolio/${slug}`, en: `/portfolio/${slug}` }),
-    openGraph: {
-      title: item[loc].title,
-      description: item[loc].summary,
-      images: [{ url: item.cover.src, alt: getCaseImageAlt(item.cover, loc) }],
-    },
+    ...getLocalizedSocialMetadata(
+      loc,
+      item[loc].title,
+      item[loc].summary,
+      `/portfolio/${slug}`,
+      { url: item.cover.src, alt: getCaseImageAlt(item.cover, loc) },
+    ),
   };
 }
 

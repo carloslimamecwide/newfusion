@@ -7,7 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { CallToAction } from "@/components/CallToAction";
 import { Icon } from "@/components/Icon";
 import { AnimatedText } from "@/components/AnimatedText";
-import { getLocalizedAlternates } from "@/lib/metadata";
+import { getLocalizedAlternates, getLocalizedSocialMetadata } from "@/lib/metadata";
 import type { Locale } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("title"),
     description: t("subtitle"),
     alternates: getLocalizedAlternates(loc, { pt: "/servicos", en: "/services" }),
-    openGraph: { title: t("title"), description: t("subtitle") },
+    ...getLocalizedSocialMetadata(loc, t("title"), t("subtitle"), loc === "pt" ? "/servicos" : "/services"),
   };
 }
 
